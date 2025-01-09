@@ -1,0 +1,177 @@
+FUNCTIONS:
+===========================================================================================================================================================================
+It is a block of code which is used to perform a specific task.
+
+1. Pre defined Functions(in built functions)
+2. user defined functions(user defined functions) PL/SQL
+
+
+ Pre defined Functions(in built functions) is divided into:-
+1 AGGREGATE FUNCTION
+2 CHARACTER FUNCTION
+3 NUMBER FUNCTION
+4 DATE FUNCTION
+5 WINDOW FUNCTION
+
+
+1 AGGREGATE FUNCTION  :- >> takes  n number of input and generates 1 output.
+Group by Group execution (vertical way i.e column way of execution)
+
+MAX(): This function is used to obtain the maximum value from the given column
+syntax:
+MAX(COLUMN_NAME);
+
+MIN(): This function is used to obtain the minimum value from the given column
+syntax:
+MIN(COLUMN_NAME);
+
+SUM():This function is used to obtain the total value from the given column
+Syntax:
+SUM(COLUMN_NAME);
+
+AVG():This function is used to obtain the average value from the given column
+Syntax:
+AVG(COLUMN_NAME);
+
+COUNT():This function is used to obtain the number of rows from the given column.
+Syntax:
+COUNT(*/COLUMN_NAME);
+
+NOTE: Only COUNT(*) TAKES * AS A ARGUMENT
+
+
+RULES/ Characteristics of aggregates functions
+========================================================================================================================================================================
+1.	AGGREGATE FUNCTION EXECUTE GROUP BY GROUP EXECUTION (vertical way i.e column way of execution)
+2.	WE CANNOT PASS ANY OTHER COLUMNS  ALONG WITH AGGREGATES FUNCTION
+3.	WE CANNOT NEST AGGRIGATES FUNCTION
+4.	WE CANNOT PASS MULTIPLE COLUMN INDISE AGGRIGATE FUNCTION
+5.	WE CANNOT PASS AGGRIGATES FUNCTION INSIDE WHERE CLAUSE
+6.	AGGRIGATE FUNCTION IGNORE NULL VALUE 
+7. 	GROUP BY> WE CAN PASS GROUP BY EXPRESSION ALONG WITH AGGREGATES FUNCTION
+==========================================================================================================================================================================
+
+
+55.	 write the query to display the max salery and min salery from emp table
+
+SELECT MAX(SAL),MIN(SAL)
+FROM EMP;
++-----------+----------+
+| MAX(SAL)  | MIN(SAL) |
++-----------+----------+
+| 500000.00 | 30000.00 |
++-----------+----------+
+1 row in set (0.04 sec)
+
+56.	WRITE THE QUERY TO DISPLAY MAX OF SALERY ,AVG SALERY ,TOTAL SALERY FROM EMP TABLE IF THE EMP IS WORKING AS SALESMAN
+
+SELECT MAX(SAL),AVG(SAL),SUM(SAL)
+FROM EMP 
+WHERE JOB = 'SALESMAN';
+
++----------+--------------+-----------+
+| MAX(SAL) | AVG(SAL)     | SUM(SAL)  |
++----------+--------------+-----------+
+| 45000.00 | 43333.333333 | 130000.00 |
++----------+--------------+-----------+
+1 row in set (0.00 sec)
+
+57	WRITE THE QUERY TO DISPLAY THE MIN SALERY AVG SALERY GIVEN TO ALL THE EMP IF EMP WERE HIRED AFTER 2017 
+
+SELECT MIN(SAL),AVG(SAL)
+FROM EMP
+WHERE DOJ > '2017-12-31';
++----------+--------------+
+| MIN(SAL) | AVG(SAL)     |
++----------+--------------+
+| 30000.00 | 39909.090909 |
++----------+--------------+
+1 row in set (0.00 sec)
+
+
+58 	WRITE THE QUERY TO DISPLAY THE FIRST EMP DATE OF JOINING
+
+SELECT MIN(DOJ)
+FROM EMP;
++------------+
+| MIN(DOJ)   |
++------------+
+| 2016-01-16 |
++------------+
+1 row in set (0.00 sec)
+
+59	WRITE THE QUERY TO DISPLAY THE DOB OF MOST ELDEST EMP
+
+SELECT MIN(DOB) 
+FROM EMP;
+
++------------+
+| MIN(DOB)   |
++------------+
+| 1985-11-24 |
++------------+
+1 row in set (0.00 sec)
+
+60. WRITE A QUERY TO DISPLAY NO OF EMP WORKING IN THE COMPANY
+SELECT COUNT(*)
+FROM EMP;
++----------+
+| COUNT(*) |
++----------+
+|       15 |
++----------+
+1 row in set (0.00 sec)
+
+61	WRITE A QUERY TO DISPLAY THE NUMBER OF EMP WORKING AS DISPATCHER
+
+SELECT COUNT(*)
+FROM EMP
+WHERE JOB='DISPATCHER';
++----------+
+| COUNT(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+62**WRITE TO DISPLAY THE NUMBER OF DIFFERENT JOB ROLES AVAILABLE IN THE COMPANY
+
+SELECT COUNT(DISTINCT JOB)
+FROM EMP;
+
++---------------------+
+| COUNT(DISTINCT JOB) |
++---------------------+
+|                   8 |
++---------------------+
+1 row in set (0.01 sec)
+
+
+
+63.	WRITE THE QUERY TO DISPLAY THE NUMBER OF EMPS WORKING IN DEPT 113
+
+SELECT COUNT(*)
+FROM EMP
+WHERE DNO=113;
+
++----------+
+| COUNT(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.00 sec)
+
+64.	WRITE THE QUERY TO DISPLAY THE NUMBER OF EMPS WORKING IN DEPT 113 112 111.
+
+SELECT COUNT(*)
+FROM EMP
+WHERE DNO LIKE 113 OR DNO LIKE 112 OR DNO LIKE 111;
+// WHERE DNO IN(113 ,112,111); 
+
++----------+
+| COUNT(*) |
++----------+
+|       10 |
++----------+
+1 row in set (0.00 sec)
+

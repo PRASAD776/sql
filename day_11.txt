@@ -1,0 +1,185 @@
+65	WRITE THE QUERY TO DISPLAY number of emp working in each and every dept
+/// pattern of question is same , observe and use group by ...
+
+SELECT COUNT(*),DNO
+FROM EMP
+GROUP BY DNO;
++----------+------+
+| COUNT(*) | DNO  |
++----------+------+
+|        4 |  113 |
+|        1 |  114 |
+|        4 |  111 |
+|        4 |  110 |
+|        2 |  112 |
++----------+------+
+5 rows in set (0.00 sec)
+
+66	WTITE THE QUERY TO DISPLAY THE MAXIMUM SALERY, MINIMUM GIVEN IN EVERY DEPT
+
+SELECT MAX(SAL),MIN(SAL)
+FROM EMP
+GROUP BY DNO;
+
++-----------+-----------+
+| MAX(SAL)  | MIN(SAL)  |
++-----------+-----------+
+| 500000.00 |  30000.00 |
+| 150000.00 | 150000.00 |
+| 100000.00 |  40000.00 |
+| 120000.00 |  45000.00 |
+|  32000.00 |  30000.00 |
++-----------+-----------+
+5 rows in set (0.00 sec)
+
+67.	WTITE THE QUERY TO DISPLAY THE NUMBER OF EMP WORKING IN EVERY JOB ROLE
+
+SELECT COUNT(*),JOB
+FROM EMP
+GROUP BY JOB;
+
++----------+------------+
+| COUNT(*) | JOB        |
++----------+------------+
+|        1 | Ceo        |
+|        1 | Hr         |
+|        2 | Manager    |
+|        3 | Dispatcher |
+|        1 | Tester     |
+|        3 | Salesman   |
+|        2 | Developer  |
+|        2 | Accountant |
++----------+------------+
+8 rows in set (0.00 sec)
+
+
+68. WRITE THE QUERY TO DISPLAY THE MAX SALERY GIVEN TO ALL EMP IN WHICH THEY ARE WORKING AS SALESMAN , MANAGER OR DISPATCHER
+
+SELECT MAX(SAL)
+FROM EMP
+WHERE JOB = 'SALESMAN' OR JOB = 'MANAGER' OR JOB = 'DISPATCHER'
+GROUP BY DNO;
+
++-----------+
+| MAX(SAL)  |
++-----------+
+| 100000.00 |
+| 120000.00 |
++-----------+
+2 rows in set (0.00 sec)
+
+69	WRITE THE QUERY TO DISPLAY NUMBER OF EMP WORKING IN EACH DEPT IF THE EMP WAS HIRED DURING 2017 TO 2021
+
+SELECT COUNT(*),DNO
+FROM EMP
+WHERE DOJ BETWEEN '2017-01-01' AND '2021-12-31'
+GROUP BY DNO;
+
++----------+------+
+| COUNT(*) | DNO  |
++----------+------+
+|        4 |  111 |
+|        4 |  110 |
+|        3 |  113 |
+|        1 |  112 |
++----------+------+
+4 rows in set (0.00 sec)
+
+70	WRITE THE QUERY TO DISPLAY THE DOJ OF FIRST EMP OF EVERY DEPT
+
+SELECT MIN(DOJ)
+FROM EMP
+GROUP BY DNO;
+
++------------+
+| MIN(DOJ)   |
++------------+
+| 2016-01-16 |
+| 2016-10-20 |
+| 2017-04-17 |
+| 2017-07-07 |
+| 2021-05-01 |
++------------+
+5 rows in set (0.00 sec)
+
+
+
+71	WRITE THE QUERY TO DISPLAY THE NUMBER OF EMPS GETTING SALERY MORE THAN OR EQUAL TO 32000 AND SAL LESS THAN OR EQUAL TO 100000 IN EVERY DEPT
+
+SELECT COUNT(*),DNO
+FROM EMP
+WHERE SAL BETWEEN 32000 AND 100000
+GROUP BY DNO;
+
++----------+------+
+| COUNT(*) | DNO  |
++----------+------+
+|        4 |  111 |
+|        3 |  110 |
+|        2 |  113 |
+|        1 |  112 |
++----------+------+
+4 rows in set (0.00 sec)
+
+=========================================================================================================================================================================================
+GROUP BY CLAUSE IS USED TO GROUP THE RECORDS
+
+syntax:
+-------------------------------------------------------------------------------------
+SELECT AGGREGATE_FUNCTIONS/GROUP_BY_EXPRESSION
+FROM TABLE_NAME
+[WHERE FILTER_CONDITION]
+GROUP BY COLUMN_NAME;
+                GROUP_BY_EXPRESSION
+
+CHARACTERISTICS OF GROUP BY CLAUSE
+======================================================================================
+>IT EXWCUTES ROW BY ROW
+>GROUP BY CLAUSE EXECUTES AFTER FROM CLAUSE IF THERE IS NO WHERE CLAUSE
+>GROUP BY CLAUSE CONVERTS THE ROW RECORDS INTO GROUP RECORDS
+>WE CAN PASS MULTIPLE COLUMNS INSIDE GROUP BY CLAUSE
+> WE CAN 
+
+
+
+
+
+HAVING CLAUSE : IT IS USED TO FILTER THE GROUP RECORDS. (GROUP BY GROUP EXECUTION)
+WE CANT PASS AGGRIGATE FUNCTION INSIDE WHERE CLAUSE WE NEED TO USE HAVING CLAUSE
+WE CAN USE AGGRIGATE FUNCTION INSIDE HAVING CLAUSE.
+ 
+
+72	WRITE THE QUERY TO DISPLAY THE NUMBER OF EMPS GETTING SALERY MORE THAN OR EQUAL TO 30000 AND MAX SALERY LESS THAN OR EQUAL TO 120000 IN EVERY DEPT.
+
+SELECT COUNT(*),DNO
+FROM EMP
+WHERE SAL >=30000
+GROUP BY DNO
+HAVING MAX(SAL)<=120000;
+
++----------+------+
+| COUNT(*) | DNO  |
++----------+------+
+|        4 |  111 |
+|        4 |  110 |
+|        2 |  112 |
++----------+------+
+3 rows in set (0.00 sec)
+
+73.	WRITE THE QUERY TO DISPLAY MAX SALERY OBTAINED IN EVERY DEPT IF THE DEPT IS HAVING AVG SAL MORE THAN 30000
+
+SELECT MAX(SAL),DNO
+FROM EMP
+GROUP BY DNO;
+HAVING AVG(SAL)>30000;
++-----------+------+
+| MAX(SAL)  | DNO  |
++-----------+------+
+| 500000.00 |  113 |
+| 150000.00 |  114 |
+| 100000.00 |  111 |
+| 120000.00 |  110 |
+|  32000.00 |  112 |
++-----------+------+
+5 rows in set (0.00 sec)
+

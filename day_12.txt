@@ -1,0 +1,195 @@
+74	 WRITE THE QUERY TO DISPLAY THE NUMBER OF EMPLOY WORKING IN EVERY JOB ROLE ,IF THE JOB ROLE HAVING ATLEAST 3 EMPS WORKING IN THAT PROFESSION
+
+SELECT COUNT(*), JOB                  ///NO ROW IN EMP TABLE
+FROM EMP
+GROUP BY JOB 
+HAVING COUNT(*)>=3;
+
++----------+------------+
+| COUNT(*) | JOB        |
++----------+------------+
+|        3 | Dispatcher |
+|        3 | Salesman   |
++----------+------------+
+2 rows in set (0.00 sec)
+
+75	WRITE THE QUERY TO DISPLAY THE MAX SALERY THE MIN SALERY IF THE TOTAL SALERY IN EVERY DEPT RANGES BETWEEN 160000 AND 400000.
+
+SELECT MAX(SAL),MIN(SAL),SUM(SAL),DNO
+FROM EMP
+GROUP BY DNO                                 ///MAX MIN OF THE DNO VISE
+HAVING SUM(SAL) BETWEEN 160000 AND 400000;
+
++-----------+----------+------+
+| MAX(SAL)  | MIN(SAL) | DNO  |
++-----------+----------+------+
+| 100000.00 | 40000.00 |  111 |
+| 120000.00 | 45000.00 |  110 |
++-----------+----------+------+
+2 rows in set (0.00 sec)
+
+///SUM OF SAL OF EACH DEPARTMENT NEED TO B BETWEEN 1.6L AND 4L
+
+76	WRITE THE QUERY TO DISPLAY THE NO OF EMP WHO R GETTING THE SAME SALERY
+
+SELECT COUNT(*),SAL
+FROM EMP
+GROUP BY SAL
+HAVING COUNT(*)>1;
++----------+----------+
+| COUNT(*) | SAL      |
++----------+----------+
+|        5 | 45000.00 |
+|        2 | 30000.00 |
+|        2 | 32000.00 |
++----------+----------+
+3 rows in set (0.00 sec)
+	
+
+77	WRITE THE QUERY TO DISPLAY THE NUMBER OF EMPS REPORTING TO EVERY MANAGER(MGR)
+
+SELECT COUNT(*),MGR
+FROM EMP
+GROUP BY MGR
+HAVING COUNT(*)>1;	
++----------+------+
+| COUNT(*) | MGR  |
++----------+------+
+|        4 | 1601 |
+|        4 | 1602 |
+|        3 | 1702 |
+|        3 | 1701 |
++----------+------+
+4 rows in set (0.00 sec)
+OR
+
+SELECT COUNT(*),MGR
+FROM EMP
+WHERE MGR IS NOT NULL
+GROUP BY MGR
+
+78	WRITE THE QUERY TO DISPLAY THE NUMBER OF EMP GETTING SAME SALERY AND ALSO WORKING IN SAME DEPARTMENT (HINT: WE CAN PASS MULTIPLE COLUMNS INSODE GROUP BY CLAUSE)
+
+SELECT COUNT(*),DNO,SAL
+FROM EMP
+GROUP BY DNO,SAL
+HAVING COUNT(*)>=2;
++----------+------+----------+
+| COUNT(*) | DNO  | SAL      |
++----------+------+----------+
+|        2 |  110 | 45000.00 |
+|        2 |  111 | 45000.00 |
++----------+------+----------+
+2 rows in set (0.00 sec)
+
+
+79	WRITE THE QUERY TO DISPLAY THE NUMBER OF EMP REPORTING TO SAME MANAGER AND WORKING IN SAME DEPT
+
+SELECT COUNT(*),DNO
+FROM EMP
+GROUP BY MGR,DNO
+HAVING COUNT(*)>1;
+
++----------+------+
+| COUNT(*) | DNO  |
++----------+------+
+|        3 |  110 |
+|        3 |  113 |
+|        3 |  111 |
+|        2 |  112 |
++----------+------+
+4 rows in set (0.00 sec)
+
+80.	 WRITE THE QUERY TO DISPLAY THE MAX SALERY ,MIN SALERY NUMBER OF EMP WORKING IN EVERY DEPT IF THE TOTAL SAL OF DEPT IS MORE THAT 150000 AND AVG SALARY IS MORE THAN 32000.
+
+SELECT MAX(SAL),MIN(SAL),COUNT(*),DNO
+FROM EMP
+GROUP BY DNO
+HAVING SUM(SAL) > 150000 AND AVG(SAL)>32000;
+
++-----------+----------+----------+------+
+| MAX(SAL)  | MIN(SAL) | COUNT(*) | DNO  |
++-----------+----------+----------+------+
+| 500000.00 | 30000.00 |        4 |  113 |
+| 100000.00 | 40000.00 |        4 |  111 |
+| 120000.00 | 45000.00 |        4 |  110 |
++-----------+----------+----------+------+
+3 rows in set (0.00 sec)
+
+==================================================================================================
+CHARACTERISTICS OF ORDER BY CLAUSE:
+__________________________________
+It is used to arrange the records either in ascending order or descending order based on a specific column.
+
+syntax:
+=======
+SELECT column_name
+FROM table_name
+ORDER BY column_name ASC/DESC
+
+ORDER BY  :
+=========
+
+CHARACTERISTICS OF ORDER BY CLAUSE
+=====================================
+>IT IS  THE LAST EXECUTABLE CLAUSE
+>IT EXECUTES AFTER THE SELECT CLAUSE
+>BY DEFAULT ALL THE TABLES WILL BE ARRANGED BASED ON PRIMARY KEY
+>WE CAN PASS MULTIPLE COLUMNS INSIDE ORDER BY CLAUSE.
+======================================================================================================================================
+
+81.	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP BASED ON THEIR SALERY FROM MAX TO MIN .
+
+//DESCENDING
+
+SELECT *
+FROM EMP
+ORDER BY SAL DESC;	
++------+----------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| EID  | FNAME    | LNAME     | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+----------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| 1601 | Siddarth | Patil     | 1985-11-24 | M      | Ceo        | NULL | 2016-01-16 | 500000.00 |    NULL |  113 | NULL |
+| 1602 | Hema     | Shetty    | 1996-03-20 | F      | Hr         | 1601 | 2016-10-20 | 150000.00 |    NULL |  114 |  507 |
+| 1702 | Sameer   | Khan      | 1995-04-20 | M      | Manager    | 1602 | 2017-07-07 | 120000.00 |    NULL |  110 | NULL |
+| 1701 | Rahul    | Mukharjee | 1991-02-19 | M      | Manager    | 1602 | 2017-04-17 | 100000.00 |    NULL |  111 | NULL |
+| 1902 | Abhijit  | Gowda     | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 |  50000.00 |    NULL |  110 |  505 |
+| 1801 | Jahnavi  | Naik      | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
+| 1901 | Shivani  | Rai       | 1998-11-07 | F      | Tester     | 1601 | 2019-12-12 |  45000.00 |    NULL |  113 |  502 |
+| 1903 | Karan    | Bhat      | 1997-12-26 | M      | Salesman   | 1701 | 2019-12-26 |  45000.00 |    NULL |  111 | NULL |
+| 2001 | Murali   | Krishnan  | 1998-06-08 | M      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
+| 2101 | Rashmi   | Gowda     | 1995-10-03 | F      | Salesman   | 1701 | 2021-01-02 |  45000.00 | 3000.00 |  111 | NULL |
+| 2104 | Aman     | Rai       | 1998-08-15 | M      | Salesman   | 1701 | 2021-12-26 |  40000.00 |    NULL |  111 | NULL |
+| 2102 | Fariya   | Taj       | 1999-01-03 | F      | Developer  | 1601 | 2021-03-01 |  32000.00 | 3600.00 |  113 | NULL |
+| 2103 | Priya    | Shetty    | 1998-03-20 | F      | Accountant | 1602 | 2021-05-01 |  32000.00 | 3600.00 |  112 | NULL |
+| 2002 | Dharani  | Patil     | 1998-11-10 | F      | Developer  | 1601 | 2021-06-20 |  30000.00 | 3000.00 |  113 | NULL |
+| 2201 | Kiran    | Raj       | 1999-09-21 | M      | Accountant | 1602 | 2022-08-28 |  30000.00 | 3600.00 |  112 |  503 |
++------+----------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+15 rows in set (0.00 sec)
+
+
+82.	WRITE THE QUERY TO DISPLAY THE FNAME,LNAME OF THE EMP ...
+SELECT FNAME,LNAME
+FROM EMP
+ORDER BY FNAME ASC;
++----------+-----------+
+| FNAME    | LNAME     |
++----------+-----------+
+| Abhijit  | Gowda     |
+| Aman     | Rai       |
+| Dharani  | Patil     |
+| Fariya   | Taj       |
+| Hema     | Shetty    |
+| Jahnavi  | Naik      |
+| Karan    | Bhat      |
+| Kiran    | Raj       |
+| Murali   | Krishnan  |
+| Priya    | Shetty    |
+| Rahul    | Mukharjee |
+| Rashmi   | Gowda     |
+| Sameer   | Khan      |
+| Shivani  | Rai       |
+| Siddarth | Patil     |
++----------+-----------+
+15 rows in set (0.00 sec)
+
+

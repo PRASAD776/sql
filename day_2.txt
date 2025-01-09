@@ -1,0 +1,208 @@
+WHERE clause will execute row by row.
+
+ALTER:
+ALTER command is used to modify the structure of the table.
+
+1. TO ADD A NEW COLUMN
+ALTER SYNTAX: 
+ALTER TABLE TABLE_NAME ADD COLUMN_NAME DATATYPE [CONSTRAINTS];
+
+DESC table_name; 
+> DESC ACCOUNTS
+    -> ;
++-----------------+-----------------+------+-----+---------+-------+
+| Field           | Type            | Null | Key | Default | Extra |
++-----------------+-----------------+------+-----+---------+-------+
+| ACC_NO          | bigint unsigned | NO   | PRI | NULL    |       |
+| ACC_HOLDER_NAME | varchar(20)     | NO   |     | NULL    |       |
+| PHONE_NUMBER    | bigint          | NO   | UNI | NULL    |       |
+| EMAIL           | varchar(30)     | YES  | UNI | NULL    |       |
+| BALANCE         | decimal(10,2)   | NO   |     | NULL    |       |
++-----------------+-----------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+>>To add the DOB column to Accounts table
+
+ALTER TABLE ACCOUNTS ADD DOB DATE NOT NULL;
+
+mysql> Desc accounts
+    -> ;
++-----------------+-----------------+------+-----+---------+-------+
+| Field           | Type            | Null | Key | Default | Extra |
++-----------------+-----------------+------+-----+---------+-------+
+| ACC_NO          | bigint unsigned | NO   | PRI | NULL    |       |
+| ACC_HOLDER_NAME | varchar(20)     | NO   |     | NULL    |       |
+| PHONE_NUMBER    | bigint          | NO   | UNI | NULL    |       |
+| EMAIL           | varchar(30)     | YES  | UNI | NULL    |       |
+| BALANCE         | decimal(10,2)   | NO   |     | NULL    |       |
+| DOB             | date            | NO   |     | NULL    |       |
++-----------------+-----------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+>> To add the IFSC Code column for branch table
+
+ALTER TABLE branch ADD IFSC_CODE VARCHAR(15) UNIQUE NOT NULL;
+
+ DESC branch
+    -> ;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| BRANCH_ID   | int         | NO   | PRI | NULL    |       |
+| BRANCH_NAME | varchar(10) | NO   |     | NULL    |       |
+| PINCODE     | int         | NO   | UNI | NULL    |       |
+| IFSC_CODE   | varchar(15) | NO   | UNI | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+>> to drop email id from accounts table
+SYNTRAX:
+ALTER TABLE_NAME DROP COLUMN_NAME;
+
+ALTER TABLE accounts DROP EMAIL;
+
+ Desc accounts;
++-----------------+-----------------+------+-----+---------+-------+
+| Field           | Type            | Null | Key | Default | Extra |
++-----------------+-----------------+------+-----+---------+-------+
+| ACC_NO          | bigint unsigned | NO   | PRI | NULL    |       |
+| ACC_HOLDER_NAME | varchar(20)     | NO   |     | NULL    |       |
+| PHONE_NUMBER    | bigint          | NO   | UNI | NULL    |       |
+| BALANCE         | decimal(10,2)   | NO   |     | NULL    |       |
+| DOB             | date            | NO   |     | NULL    |       |
++-----------------+-----------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+ALTER TABLE table_name Modify column_name [new_data_type] NULL/NOT NULL;
+
+>> To modify acc holder name to char datatype
+
+ALTER TABLE ACCOUNTS MODIFY ACC_HOLDER_NAME CHAR(10) NOT NULL;
+
+Desc accounts;
++-----------------+-----------------+------+-----+---------+-------+
+| Field           | Type            | Null | Key | Default | Extra |
++-----------------+-----------------+------+-----+---------+-------+
+| ACC_NO          | bigint unsigned | NO   | PRI | NULL    |       |
+| ACC_HOLDER_NAME | char(10)        | NO   |     | NULL    |       |
+| PHONE_NUMBER    | bigint          | NO   | UNI | NULL    |       |
+| BALANCE         | decimal(10,2)   | NO   |     | NULL    |       |
+| DOB             | date            | NO   |     | NULL    |       |
++-----------------+-----------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+>> To modify phone number from bigint to decimal.
+ 
+ALTER TABLE ACCOUNTS MODIFY PHONE_NUMBER DECIMAL(10) NOT NULL;
+
+mysql> Desc accounts;
++-----------------+-----------------+------+-----+---------+-------+
+| Field           | Type            | Null | Key | Default | Extra |
++-----------------+-----------------+------+-----+---------+-------+
+| ACC_NO          | bigint unsigned | NO   | PRI | NULL    |       |
+| ACC_HOLDER_NAME | char(10)        | NO   |     | NULL    |       |
+| PHONE_NUMBER    | decimal(10,0)   | NO   | UNI | NULL    |       |
+| BALANCE         | decimal(10,2)   | NO   |     | NULL    |       |
+| DOB             | date            | NO   |     | NULL    |       |
++-----------------+-----------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+TO MODIFY THE NULL/NOT NULL
+ALTER TBLE table_name MODIFY column_name existing in datatype NULL/NOT NULL;
+
+>> To modify the DOB FROM Not null to null
+
+ALTER TABLE ACCOUNTS MODIFY DOB DATE NULL;
+
+mysql> Desc accounts;
++-----------------+-----------------+------+-----+---------+-------+
+| Field           | Type            | Null | Key | Default | Extra |
++-----------------+-----------------+------+-----+---------+-------+
+| ACC_NO          | bigint unsigned | NO   | PRI | NULL    |       |
+| ACC_HOLDER_NAME | char(10)        | NO   |     | NULL    |       |
+| PHONE_NUMBER    | decimal(10,0)   | NO   | UNI | NULL    |       |
+| BALANCE         | decimal(10,2)   | NO   |     | NULL    |       |
+| DOB             | date            | YES  |     | NULL    |       |
++-----------------+-----------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+>> To modify the pin code column from not null to null in branch table;
+
+ALTER TABLE BRANCH MOD bb  IFY PINCODE INT NULL;
+
+mysql> Desc BRANCH;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| BRANCH_ID   | int         | NO   | PRI | NULL    |       |
+| BRANCH_NAME | varchar(10) | NO   |     | NULL    |       |
+| PINCODE     | int         | YES  | UNI | NULL    |       | 
+| IFSC_CODE   | varchar(15) | NO   | UNI | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+>>Change table_name:
+ALTER TABLE table_name RENAME new_table_name;
+
+>>Change the accounts table name to ACC
+ALLTER TABLE ACCOUNTS RENAME ACC;
+
+ Desc ACC;
++-----------------+-----------------+------+-----+---------+-------+
+| Field           | Type            | Null | Key | Default | Extra |
++-----------------+------ -----------+------+-----+---------+-------+
+| ACC_NO          | bigint unsigned | NO   | PRI | NULL    |       |
+| ACC_HOLDER_NAME | char(10)        | NO   |     | NULL    |       |
+| PHONE_NUMBER    | decimal(10,0)   | NO   | UNI | NULL    |       |
+| BALANCE         | decimal(10,2)   | NO   |     | NULL    |       |
+| DOB             | date            | YES  |     | NULL    |       |
++-----------------+-----------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+>>To change the column name
+
+ALTER TABLE table_name CHANGE old_column_name new_column_name existing_datatype null/not null;
+
+>>To change the DOB to BIRTH_DATE
+--------------------------------------------
+ALTER TABLE ACC CHANGE DOB BIRTH_DATE DATE NULL;
+
+Desc ACC;
++-----------------+-----------------+------+-----+---------+-------+
+| Field           | Type            | Null | Key | Default | Extra |
++-----------------+-----------------+------+-----+---------+-------+
+| ACC_NO          | bigint unsigned | NO   | PRI | NULL    |       |
+| ACC_HOLDER_NAME | char(10)        | NO   |     | NULL    |       |
+| PHONE_NUMBER    | decimal(10,0)   | NO   | UNI | NULL    |       |
+| BALANCE         | decimal(10,2)   | NO   |     | NULL    |       |
+| BIRTH_DATE      | date            | YES  |     | NULL    |       |
++-----------------+-----------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+>> To add constraints
+-------------------------
+ALTER TABLE TABLE_NAME 
+ADD CONSTRAINT PRIMARY KEY(column_name);
+ADD CONSTRAINT UNIQUE(column_name);
+ADD CONSTRAINT CHECK(condition);
+ADD CONSTRAINT FOREIGN KEY(column_name) REFERENCES parent_table_name(column_name);
+
+>> To add branch_id in ACC table and make it foreign key
+--------------------------------------------------------------------------------------------
+ALTER TABLE ACC ADD B_ID INT, ADD CONSTRAINT FOREIGN KEY(B_ID) REFERENCES BRANCH(BRANCH_ID);
+
+Desc ACC;
++-----------------+-----------------+------+-----+---------+-------+
+| Field           | Type            | Null | Key | Default | Extra |
++-----------------+-----------------+------+-----+---------+-------+
+| ACC_NO          | bigint unsigned | NO   | PRI | NULL    |       |
+| ACC_HOLDER_NAME | char(10)        | NO   |     | NULL    |       |
+| PHONE_NUMBER    | decimal(10,0)   | NO   | UNI | NULL    |       |
+| BALANCE         | decimal(10,2)   | NO   |     | NULL    |       |
+| BIRTH_DATE      | date            | YES  |     | NULL    |       |
+| B_ID            | int             | YES  | MUL | NULL    |       |
++-----------------+-----------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
+

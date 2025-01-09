@@ -1,0 +1,17 @@
+To drop PRIMARY KEY
+----------------------------------------------------------------
+ALTER TABLE table_name
+DROP PRIMARY KEY ;
+
+
+
+
+
+To drop constraints
+-----------------------------------------------------
+ALTER TABLE table_name
+DROP CONSTRAINT CONSTRAINT_NAME;
+
+ALTER TABLE ACC DROP CONSTRAINT acc_vhsjgh_1
+
+here, the constarint 

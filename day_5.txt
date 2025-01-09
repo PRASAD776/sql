@@ -1,0 +1,306 @@
+DQL (Data Query language)
+=============================
+Projection : It is the process of retrieving the data from the table by using column names. 
+
+SYNTAX :
+SELECT column_name
+FROM table_name;
+
+EXAMPLE :
+SELECT Name
+FROM STUDENT;
+
+SELECT AND FROM is called as clauses
+SELECT clause will take column name and expression as argument ; display the record .
+
+FROM clause will search table from db , puts table into execution .
+FROM clause will execute first .
+
+
+WRITE A QUERY TO DISPLAY THE EMP FIRST NAME AND EMPLOYER LAST NAME FROM EMP TABLE:
+>>  
+
+mysql> SELECT FNAME,LNAME
+    -> FROM EMP;
++----------+-----------+
+| FNAME    | LNAME     |
++----------+-----------+
+| Siddarth | Patil     |
+| Hema     | Shetty    |
+| Rahul    | Mukharjee |
+| Sameer   | Khan      |
+| Jahnavi  | Naik      |
+| Shivani  | Rai       |
+| Abhijit  | Gowda     |
+| Karan    | Bhat      |
+| Murali   | Krishnan  |
+| Dharani  | Patil     |
+| Rashmi   | Gowda     |
+| Fariya   | Taj       |
+| Priya    | Shetty    |
+| Aman     | Rai       |
+| Kiran    | Raj       |
++----------+-----------+
+15 rows in set (0.00 sec)
+
+
+WRITE THE QUERY TO DISPLAY THE EMP FNAME SAL COMM FROM EMP TABLE
+mysql> SELECT FNAME, SAL,COMM
+    -> FROM EMP;
++----------+-----------+---------+
+| FNAME    | SAL       | COMM    |
++----------+-----------+---------+
+| Siddarth | 500000.00 |    NULL |
+| Hema     | 150000.00 |    NULL |
+| Rahul    | 100000.00 |    NULL |
+| Sameer   | 120000.00 |    NULL |
+| Jahnavi  |  45000.00 | 1000.00 |
+| Shivani  |  45000.00 |    NULL |
+| Abhijit  |  50000.00 |    NULL |
+| Karan    |  45000.00 |    NULL |
+| Murali   |  45000.00 | 1000.00 |
+| Dharani  |  30000.00 | 3000.00 |
+| Rashmi   |  45000.00 | 3000.00 |
+| Fariya   |  32000.00 | 3600.00 |
+| Priya    |  32000.00 | 3600.00 |
+| Aman     |  40000.00 |    NULL |
+| Kiran    |  30000.00 | 3600.00 |
++----------+-----------+---------+
+15 rows in set (0.00 sec)
+
+
+
+
+WRITE A QUERY TO DISCRIBE FIRST NAME,SALERY,JOB ROLE AND DATE OF JOINING FROM EMP TABLE
+>>
+mysql> SELECT FNAME,SAL,JOB,DOJ
+    -> FROM EMP;
++----------+-----------+------------+------------+
+| FNAME    | SAL       | JOB        | DOJ        |
++----------+-----------+------------+------------+
+| Siddarth | 500000.00 | Ceo        | 2016-01-16 |
+| Hema     | 150000.00 | Hr         | 2016-10-20 |
+| Rahul    | 100000.00 | Manager    | 2017-04-17 |
+| Sameer   | 120000.00 | Manager    | 2017-07-07 |
+| Jahnavi  |  45000.00 | Dispatcher | 2020-03-15 |
+| Shivani  |  45000.00 | Tester     | 2019-12-12 |
+| Abhijit  |  50000.00 | Dispatcher | 2019-12-28 |
+| Karan    |  45000.00 | Salesman   | 2019-12-26 |
+| Murali   |  45000.00 | Dispatcher | 2020-03-15 |
+| Dharani  |  30000.00 | Developer  | 2021-06-20 |
+| Rashmi   |  45000.00 | Salesman   | 2021-01-02 |
+| Fariya   |  32000.00 | Developer  | 2021-03-01 |
+| Priya    |  32000.00 | Accountant | 2021-05-01 |
+| Aman     |  40000.00 | Salesman   | 2021-12-26 |
+| Kiran    |  30000.00 | Accountant | 2022-08-28 |
++----------+-----------+------------+------------+
+15 rows in set (0.00 sec)
+
+
+WRITE THE QUERY TO DISPLAY FNAME SALERY ALONG WITH ANNUAL SALERY.:-
+>>
+// SAL IS MONTHLY SALERY ,YEARLY SALERY IS NOT DISPLAYED IN TABLE SO SAL*12
+>>
+mysql> SELECT FNAME ,SAL*12
+    -> FROM EMP;
++----------+------------+
+| FNAME    | SAL*12     |
++----------+------------+
+| Siddarth | 6000000.00 |
+| Hema     | 1800000.00 |
+| Rahul    | 1200000.00 |
+| Sameer   | 1440000.00 |
+| Jahnavi  |  540000.00 |
+| Shivani  |  540000.00 |
+| Abhijit  |  600000.00 |
+| Karan    |  540000.00 |
+| Murali   |  540000.00 |
+| Dharani  |  360000.00 |
+| Rashmi   |  540000.00 |
+| Fariya   |  384000.00 |
+| Priya    |  384000.00 |
+| Aman     |  480000.00 |
+| Kiran    |  360000.00 |
++----------+------------+
+15 rows in set (0.00 sec
+
+WRITE A QUERY TO DISPLAY EMP FNAME SAL ALONG WITH ANNUAL SALERY WITH 50000 RS BONUS
+>>
+
+mysql> SELECT FNAME ,(SAL*12)+50000
+    -> FROM EMP;
++----------+------------------+
+| FNAME    | ((SAL*12)+50000) |
++----------+------------------+
+| Siddarth |       6050000.00 |
+| Hema     |       1850000.00 |
+| Rahul    |       1250000.00 |
+| Sameer   |       1490000.00 |
+| Jahnavi  |        590000.00 |
+| Shivani  |        590000.00 |
+| Abhijit  |        650000.00 |
+| Karan    |        590000.00 |
+| Murali   |        590000.00 |
+| Dharani  |        410000.00 |
+| Rashmi   |        590000.00 |
+| Fariya   |        434000.00 |
+| Priya    |        434000.00 |
+| Aman     |        530000.00 |
+| Kiran    |        410000.00 |
++----------+------------------+
+15 rows in set (0.00 sec)
+
+
+WRITE A QUERY TO DISPLAY EMP FNAME WITH 10000 INCREMENT
+mysql> SELECT FNAME, SAL+10000
+    -> FROM EMP;
++----------+-----------+
+| FNAME    | SAL+10000 |
++----------+-----------+
+| Siddarth | 510000.00 |
+| Hema     | 160000.00 |
+| Rahul    | 110000.00 |
+| Sameer   | 130000.00 |
+| Jahnavi  |  55000.00 |
+| Shivani  |  55000.00 |
+| Abhijit  |  60000.00 |
+| Karan    |  55000.00 |
+| Murali   |  55000.00 |
+| Dharani  |  40000.00 |
+| Rashmi   |  55000.00 |
+| Fariya   |  42000.00 |
+| Priya    |  42000.00 |
+| Aman     |  50000.00 |
+| Kiran    |  40000.00 |
++----------+-----------+
+15 rows in set (0.00 sec)
+
+
+
+WRITE A QUERY TO DISPLAY EMP FNAME LNAME WITH SALERY 50000 DIDUCTION
+mysql> SELECT FNAME, LNAME ,SAL-50000
+    -> FROM EMP;
++----------+-----------+-----------+
+| FNAME    | LNAME     | SAL-50000 |
++----------+-----------+-----------+
+| Siddarth | Patil     | 450000.00 |
+| Hema     | Shetty    | 100000.00 |
+| Rahul    | Mukharjee |  50000.00 |
+| Sameer   | Khan      |  70000.00 |
+| Jahnavi  | Naik      |  -5000.00 |
+| Shivani  | Rai       |  -5000.00 |
+| Abhijit  | Gowda     |      0.00 |
+| Karan    | Bhat      |  -5000.00 |
+| Murali   | Krishnan  |  -5000.00 |
+| Dharani  | Patil     | -20000.00 |
+| Rashmi   | Gowda     |  -5000.00 |
+| Fariya   | Taj       | -18000.00 |
+| Priya    | Shetty    | -18000.00 |
+| Aman     | Rai       | -10000.00 |
+| Kiran    | Raj       | -20000.00 |
++----------+-----------+-----------+
+15 rows in set (0.00 sec)
+
+
+WRITE THE QUERY TO DISPLAY EMP FNAME, SAL WITH 10% HIKE
+
+SELECT FNAME ,(SAL*0.1)+SAL
+FROM EMP;
++----------+---------------+
+| FNAME    | (SAL*0.1)+SAL |
++----------+---------------+
+| Siddarth |    550000.000 |
+| Hema     |    165000.000 |
+| Rahul    |    110000.000 |
+| Sameer   |    132000.000 |
+| Jahnavi  |     49500.000 |
+| Shivani  |     49500.000 |
+| Abhijit  |     55000.000 |
+| Karan    |     49500.000 |
+| Murali   |     49500.000 |
+| Dharani  |     33000.000 |
+| Rashmi   |     49500.000 |
+| Fariya   |     35200.000 |
+| Priya    |     35200.000 |
+| Aman     |     44000.000 |
+| Kiran    |     33000.000 |
++----------+---------------+
+15 rows in set (0.00 sec)
+
+WRITE A QUERY TO DISPLAY THE DETAILS OF EMP ALONG WITH THE ANNUAL SALERY
+
+
+mysql> SELECT * , SAL*12
+    -> FROM EMP;
++------+----------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+------------+
+| EID  | FNAME    | LNAME     | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  | SAL*12     |
++------+----------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+------------+
+| 1601 | Siddarth | Patil     | 1985-11-24 | M      | Ceo        | NULL | 2016-01-16 | 500000.00 |    NULL |  113 | NULL | 6000000.00 |
+| 1602 | Hema     | Shetty    | 1996-03-20 | F      | Hr         | 1601 | 2016-10-20 | 150000.00 |    NULL |  114 |  507 | 1800000.00 |
+| 1701 | Rahul    | Mukharjee | 1991-02-19 | M      | Manager    | 1602 | 2017-04-17 | 100000.00 |    NULL |  111 | NULL | 1200000.00 |
+| 1702 | Sameer   | Khan      | 1995-04-20 | M      | Manager    | 1602 | 2017-07-07 | 120000.00 |    NULL |  110 | NULL | 1440000.00 |
+| 1801 | Jahnavi  | Naik      | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |  540000.00 |
+| 1901 | Shivani  | Rai       | 1998-11-07 | F      | Tester     | 1601 | 2019-12-12 |  45000.00 |    NULL |  113 |  502 |  540000.00 |
+| 1902 | Abhijit  | Gowda     | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 |  50000.00 |    NULL |  110 |  505 |  600000.00 |
+| 1903 | Karan    | Bhat      | 1997-12-26 | M      | Salesman   | 1701 | 2019-12-26 |  45000.00 |    NULL |  111 | NULL |  540000.00 |
+| 2001 | Murali   | Krishnan  | 1998-06-08 | M      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |  540000.00 |
+| 2002 | Dharani  | Patil     | 1998-11-10 | F      | Developer  | 1601 | 2021-06-20 |  30000.00 | 3000.00 |  113 | NULL |  360000.00 |
+| 2101 | Rashmi   | Gowda     | 1995-10-03 | F      | Salesman   | 1701 | 2021-01-02 |  45000.00 | 3000.00 |  111 | NULL |  540000.00 |
+| 2102 | Fariya   | Taj       | 1999-01-03 | F      | Developer  | 1601 | 2021-03-01 |  32000.00 | 3600.00 |  113 | NULL |  384000.00 |
+| 2103 | Priya    | Shetty    | 1998-03-20 | F      | Accountant | 1602 | 2021-05-01 |  32000.00 | 3600.00 |  112 | NULL |  384000.00 |
+| 2104 | Aman     | Rai       | 1998-08-15 | M      | Salesman   | 1701 | 2021-12-26 |  40000.00 |    NULL |  111 | NULL |  480000.00 |
+| 2201 | Kiran    | Raj       | 1999-09-21 | M      | Accountant | 1602 | 2022-08-28 |  30000.00 | 3600.00 |  112 |  503 |  360000.00 |
++------+----------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+------------+
+15 rows in set (0.00 sec)
+
+
+WRITE A QUERY TO DISPLAY WITH FNAME AND SAL WITH 5% HIKE
+
+mysql> SELECT FNAME,SAL+(SAL*0.05)
+    -> FROM EMP;
++----------+----------------+
+| FNAME    | SAL+(SAL*0.05) |
++----------+----------------+
+| Siddarth |    525000.0000 |
+| Hema     |    157500.0000 |
+| Rahul    |    105000.0000 |
+| Sameer   |    126000.0000 |
+| Jahnavi  |     47250.0000 |
+| Shivani  |     47250.0000 |
+| Abhijit  |     52500.0000 |
+| Karan    |     47250.0000 |
+| Murali   |     47250.0000 |
+| Dharani  |     31500.0000 |
+| Rashmi   |     47250.0000 |
+| Fariya   |     33600.0000 |
+| Priya    |     33600.0000 |
+| Aman     |     42000.0000 |
+| Kiran    |     31500.0000 |
++----------+----------------+
+15 rows in set (0.00 sec)
+
+WRITE A QUERY TO DISPLAY WITH FNAME SAL WITH 4% HIKE AND ANNUAL SALERY WITH 5% HIKE
+
+mysql> SELECT FNAME, (SAL*0.04)+SAL, (((SAL*12)*0.05)+(SAL*12))
+    -> FROM EMP;
++----------+----------------+----------------------------+
+| FNAME    | (SAL*0.04)+SAL | (((SAL*12)*0.05)+(SAL*12)) |
++----------+----------------+----------------------------+
+| Siddarth |    520000.0000 |               6300000.0000 |
+| Hema     |    156000.0000 |               1890000.0000 |
+| Rahul    |    104000.0000 |               1260000.0000 |
+| Sameer   |    124800.0000 |               1512000.0000 |
+| Jahnavi  |     46800.0000 |                567000.0000 |
+| Shivani  |     46800.0000 |                567000.0000 |
+| Abhijit  |     52000.0000 |                630000.0000 |
+| Karan    |     46800.0000 |                567000.0000 |
+| Murali   |     46800.0000 |                567000.0000 |
+| Dharani  |     31200.0000 |                378000.0000 |
+| Rashmi   |     46800.0000 |                567000.0000 |
+| Fariya   |     33280.0000 |                403200.0000 |
+| Priya    |     33280.0000 |                403200.0000 |
+| Aman     |     41600.0000 |                504000.0000 |
+| Kiran    |     31200.0000 |                378000.0000 |
++----------+----------------+----------------------------+ 
+
+IN RESULTATNT TABLE(ABOVE TABLE) WE CAN CHANGE NAME :

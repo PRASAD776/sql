@@ -1,0 +1,194 @@
+29.	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMPLOYEE WHO ARE GETTING SALERY MORE THAN 35000 BUT NOT IN DEPARTMENT 110 OR 111 OR 112
+	
+>> SELECT*
+FROM EMP
+WHERE SAL>35000 AND DNO NOT IN (110,111,112);
+
++------+----------+--------+------------+--------+--------+------+------------+-----------+------+------+------+
+| EID  | FNAME    | LNAME  | DOB        | GENDER | JOB    | MGR  | DOJ        | SAL       | COMM | DNO  | CID  |
++------+----------+--------+------------+--------+--------+------+------------+-----------+------+------+------+
+| 1601 | Siddarth | Patil  | 1985-11-24 | M      | Ceo    | NULL | 2016-01-16 | 500000.00 | NULL |  113 | NULL |
+| 1602 | Hema     | Shetty | 1996-03-20 | F      | Hr     | 1601 | 2016-10-20 | 150000.00 | NULL |  114 |  507 |
+| 1901 | Shivani  | Rai    | 1998-11-07 | F      | Tester | 1601 | 2019-12-12 |  45000.00 | NULL |  113 |  502 |
++------+----------+--------+------------+--------+--------+------+------------+-----------+------+------+------+
+
+
+
+30. 	WRITE THE QUERY TO DISPLAY THE EMP FNAME, SAL IF THE EMP IS GETTING SALERY MORE THAN OR EQUAL TO 32000 AND LESS THAN OR EQUAL TO 50000.
+
+SELECT FNAME,SAL
+FROM EMP
+WHERE SAL>=32000 AND SAL<=50000;
+
+or
+
+SELECT FNAME,SAL
+FROM EMP
+WHERE SAL BETWEEN 320000 AND 50000;
+
++---------+----------+
+| FNAME   | SAL      |
++---------+----------+
+| Jahnavi | 45000.00 |
+| Shivani | 45000.00 |
+| Abhijit | 50000.00 |
+| Karan   | 45000.00 |
+| Murali  | 45000.00 |
+| Rashmi  | 45000.00 |
+| Fariya  | 32000.00 |
+| Priya   | 32000.00 |
+| Aman    | 40000.00 |
++---------+----------+
+9 rows in set (0.00 sec)
+
+======================================================================================
+WHENEVER WE COME ACROSS RANGE OF VALUES,WE GO FOR BETWEEN OPERATOR
+
+SYNTAX: column_name BETWEEN/NOT BETWEEN lower_range AND hinger_range;
+
+                                         >=                  <= 
+NOTE: BETWEEN OPERATOR INCLUDED THE RANGE VALUES
+==========================================================================================
+31.	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP WHO WERE HIRE DURING THE YEAR 2021.
+
+SELECT *
+FROM EMP
+WHERE DOJ BETWEEN '2021-01-01' AND '2021-12-31';
+   
++------+---------+--------+------------+--------+------------+------+------------+----------+---------+------+------+
+| EID  | FNAME   | LNAME  | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL      | COMM    | DNO  | CID  |
++------+---------+--------+------------+--------+------------+------+------------+----------+---------+------+------+
+| 2002 | Dharani | Patil  | 1998-11-10 | F      | Developer  | 1601 | 2021-06-20 | 30000.00 | 3000.00 |  113 | NULL |
+| 2101 | Rashmi  | Gowda  | 1995-10-03 | F      | Salesman   | 1701 | 2021-01-02 | 45000.00 | 3000.00 |  111 | NULL |
+| 2102 | Fariya  | Taj    | 1999-01-03 | F      | Developer  | 1601 | 2021-03-01 | 32000.00 | 3600.00 |  113 | NULL |
+| 2103 | Priya   | Shetty | 1998-03-20 | F      | Accountant | 1602 | 2021-05-01 | 32000.00 | 3600.00 |  112 | NULL |
+| 2104 | Aman    | Rai    | 1998-08-15 | M      | Salesman   | 1701 | 2021-12-26 | 40000.00 |    NULL |  111 | NULL |
++------+---------+--------+------------+--------+------------+------+------------+----------+---------+------+------+
+5 rows in set (0.00 sec)
+
+32.	WRITE THE QUERY TO DISPLAY THE EMP FNAME,SAL IF THE EMP GETTING SALERY MORE THEN 32000 AND LESS THAN 450000
+
+SELECT FNAME, SAL
+FROM EMP
+WHERE SAL>32000 AND SAL<45000; 
+
++-------+----------+
+| FNAME | SAL      |
++-------+----------+
+| Aman  | 40000.00 |
++-------+----------+
+1 row in set (0.00 sec)
+
+mysql>
+
+33.	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP WHO ARE WORKING AS SALESMAN,TESTER,DEVELOPER,DISPATCHER BUT NOT GETTING SALERY IN THE RANGE OF 32000 TO 40000
+>>
+
+SELECT *
+FROM EMP 
+WHERE JOB IN('salesman','tester','developer','dispatcher') AND SAL NOT BETWEEN 32000 AND 40000;
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+| EID  | FNAME   | LNAME    | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL      | COMM    | DNO  | CID  |
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+| 1801 | Jahnavi | Naik     | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 | 45000.00 | 1000.00 |  110 | NULL |
+| 1901 | Shivani | Rai      | 1998-11-07 | F      | Tester     | 1601 | 2019-12-12 | 45000.00 |    NULL |  113 |  502 |
+| 1902 | Abhijit | Gowda    | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 | 50000.00 |    NULL |  110 |  505 |
+| 1903 | Karan   | Bhat     | 1997-12-26 | M      | Salesman   | 1701 | 2019-12-26 | 45000.00 |    NULL |  111 | NULL |
+| 2001 | Murali  | Krishnan | 1998-06-08 | M      | Dispatcher | 1702 | 2020-03-15 | 45000.00 | 1000.00 |  110 | NULL |
+| 2002 | Dharani | Patil    | 1998-11-10 | F      | Developer  | 1601 | 2021-06-20 | 30000.00 | 3000.00 |  113 | NULL |
+| 2101 | Rashmi  | Gowda    | 1995-10-03 | F      | Salesman   | 1701 | 2021-01-02 | 45000.00 | 3000.00 |  111 | NULL |
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+7 rows in set (0.00 sec)
+
+34.	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP WHO ARE ALSO THE CUSTOMERS OF THEIR COMPANY
+
+SELECT *
+FROM EMP
+WHERE CID IS NOT NULL;
+mysql> SELECT *
+    -> FROM EMP
+    -> WHERE CID IS NOT NULL;
++------+---------+--------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| EID  | FNAME   | LNAME  | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+---------+--------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| 1602 | Hema    | Shetty | 1996-03-20 | F      | Hr         | 1601 | 2016-10-20 | 150000.00 |    NULL |  114 |  507 |
+| 1901 | Shivani | Rai    | 1998-11-07 | F      | Tester     | 1601 | 2019-12-12 |  45000.00 |    NULL |  113 |  502 |
+| 1902 | Abhijit | Gowda  | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 |  50000.00 |    NULL |  110 |  505 |
+| 2201 | Kiran   | Raj    | 1999-09-21 | M      | Accountant | 1602 | 2022-08-28 |  30000.00 | 3600.00 |  112 |  503 |
++------+---------+--------+------------+--------+------------+------+------------+-----------+---------+------+------+
+///// THE PEOPLE OF Same company and working as customer , customer id was been displayed ...THERE CID is not null so use NOT NULL 
+
+35	WRITE THE QUERY TO DISPLAY EMP FNAME ,COMMISION WHO ARE GETTING THE COMMISION.
+
+SELECT FNAME ,COMM
+FROM EMP
+WHERE COMM IS NOT NULL;
++---------+---------+
+| FNAME   | COMM    |
++---------+---------+
+| Jahnavi | 1000.00 |
+| Murali  | 1000.00 |
+| Dharani | 3000.00 |
+| Rashmi  | 3000.00 |
+| Fariya  | 3600.00 |
+| Priya   | 3600.00 |
+| Kiran   | 3600.00 |
++---------+---------+
+7 rows in set (0.00 sec)
+
+36.	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP WHO DOESNT HAVE ANY REPORTING MANAGER
+
+SELECT *
+FROM EMP
+WHERE MGR IS NULL; 
+
+///HERE MGR IS REPORTING MANAGER, HE IS CEO SO NO REPORTING MANAGER
+
++------+----------+-------+------------+--------+-----+------+------------+-----------+------+------+------+
+| EID  | FNAME    | LNAME | DOB        | GENDER | JOB | MGR  | DOJ        | SAL       | COMM | DNO  | CID  |
++------+----------+-------+------------+--------+-----+------+------------+-----------+------+------+------+
+| 1601 | Siddarth | Patil | 1985-11-24 | M      | Ceo | NULL | 2016-01-16 | 500000.00 | NULL |  113 | NULL |
++------+----------+-------+------------+--------+-----+------+------------+-----------+------+------+------+
+
+37	 THE QUERY TO DISPAY THE DETAILS OF EMP WHO ARE WOKING AS MANAGER ,DEVELOPER,ACCOUNTANT BUT NOT IN DEPT 110 OR 112,GETTING SALERY IN THE RANGE OF 30000 TO 45000 BUT WHERE NOT BORN IN THE YEAR 1993, AND ALSO HE MUST HAVE A REPORTING MANAGER BUT SHOULD NOT GET ANY COMM.
+
+>>
+SELECT *
+FROM EMP
+WHERE JOB IN('manager','developer','accountant') AND DNO NOT IN(110,112) AND SAL BETWEEN 30000 AND 45000 AND DOB NOT BETWEEN '1993-01-01' AND '1993-12-31' AND MGR IS NOT NULL AND COMM IS NULL;
+
+Empty set (0.00 sec)
+======================================================================================================================================
+LIKE OPERATOR :
+=============
+LIKE OPERATOR IS USED TO MATCH THE PATTERN 
+SYNTAX :- column_name LIKE 'pattern_to_match';
+
+WE USE 2 WILDCARD IN LIKE OPERATORS % AND _ 
+
+% PERCENTILE : IT TAKES ANY CHARACTER ANY NO OF TIME
+
+EXAMPLE: WHERE NAME LIKE 'S%';
+WHERE NAME LIKE '%N;
+WHERE NAME LIKE '%S%';
+WHERE NAME LIKE '%R%R%';
+
+_ UNDERSCORE : IT TAKES ANY CHARACTER BUT ONLY ONE CHARACTER AT ATIME
+WHERE NAME LIKE'_R%';
+WHERE NAME LIKE'%H__';
+//LAST THIRD CHAR IS H
+======================================================================================================================================
+38 WRITE A QUERY TO DISPLAY THE DETAILS OF EMP WHOSE FNAME STARTS WITH S.
+>>
+
+SELECT *
+FROM EMP
+WHERE FNAME LIKE 'S%';
+------+----------+-------+------------+--------+---------+------+------------+-----------+------+------+------+
+| EID  | FNAME    | LNAME | DOB        | GENDER | JOB     | MGR  | DOJ        | SAL       | COMM | DNO  | CID  |
++------+----------+-------+------------+--------+---------+------+------------+-----------+------+------+------+
+| 1702 | Sameer   | Khan  | 1995-04-20 | M      | Manager | 1602 | 2017-07-07 | 120000.00 | NULL |  110 | NULL |
+| 1901 | Shivani  | Rai   | 1998-11-07 | F      | Tester  | 1601 | 2019-12-12 |  45000.00 | NULL |  113 |  502 |
+| 1601 | Siddarth | Patil | 1985-11-24 | M      | Ceo     | NULL | 2016-01-16 | 500000.00 | NULL |  113 | NULL |
++------+----------+-------+------------+--------+---------+------+------------+-----------+------+------+------+
+3 rows in set (0.00 sec)

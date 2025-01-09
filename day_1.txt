@@ -1,0 +1,211 @@
+ sql statements/commands
+==========================================================================================================================================
+
+
+How to create a Data base
+>> CREATE DATABASE DEMO;
+
+
+To access DB
+>> USE DEMO;
+
+To display the DB that are available in MySQL
+>>SHOW DATABASE
+
+To check the table description
+>>DESC TABLE_NAME;
+
+To display the tables that are present in db
+>>SHOW TABLES;
+
+
+
+DDL (Data Definition language)
+------------------------------------------------------------------------------------------------------------------------------------------
+1.CREATE
+This command is used to create the db and its objects.
+
+creation of table
+
+syntax:
+CREATE TABLE table name
+(
+	column_name_1 DATATYPE [constraint] NULL/NOT NULL,
+	column_name_2 DATATYPE [constraint] NULL/NOT NULL, 
+	.
+	.
+	.
+	column_name_n DATATYPE [constraint] NULL/NOT NULL
+);  
+
+
+EXAMPLE 1:
+
+CREATE TABLE ACCOUNTS
+(
+	ACC_NO BIGINT UNSIGNED PRIMARY KEY,
+	ACC_HOLDER_NAME VARCHAR(20) NOT NULL,
+	PHONE_NUMBER BIGINT UNIQUE NOT NULL CHECK(LENGTH(PHONE_NUMBER)=10),
+    EMAIL VARCHAR(30) UNIQUE,
+    BALANCE DECIMAL(10,2) NOT NULL
+);  
+CREATE TABLE BRANCH
+(
+	BRANCH_ID INT PRIMARY KEY,
+    BRANCH_NAME VARCHAR(10) NOT NULL,
+    PINCODE INT UNIQUE NOT NULL
+);
+CREATE TABLE LOCATION
+(
+	PINCODE INT PRIMARY KEY,
+    AREA VARCHAR(30) NOT NULL,
+	CITY VARCHAR(30) NOT NULL,
+	STATE VARCHAR(30) NOT NULL
+);
+
+How to show tables?
+>> SHOW TABLES;
+
+
+
+2.ALTER 
+3.DROP
+4.TRUNCATE
+
+
+DML (Data Manipulation language)
+-----------------------------------------------------------------------------------------------------------------------------------------
+1. INSERT   : This command is used to add record inside the table
+
+syntax 1: INSERT INTO table_name(col_1,col_2,...col_n)VALUES(V1,V2,...Vn)(V1,V2,...V_n);
+if u don't know the order of the column use this syntax
+
+INSERT INTO LOCATION(STATE,PINCODE,CITY,AREA) VALUES('KARNATAKA' ,560001,'BANGALURU','MGROAD');
+
+  mysql> SELECT * FROM LOCATION;
+>>
++---------+--------+-----------+-----------+
+| PINCODE | AREA   | CITY      | STATE     |
++---------+--------+-----------+-----------+
+|  560001 | MGROAD | BANGALURU | KARNATAKA |
++---------+--------+-----------+-----------+
+
+
+
+syntax2: INSERT INTO table_name )VALUES(V1,V2,...Vn)(V1,V2,...V_n);
+INSERT  INTO LOCATION VALUES (560040,'vijaynagar','Bangaluru','Karnataka');
+
+SELECT * 
+FROM LOCATION;
+>>
++---------+------------+-----------+-----------+
+| PINCODE | AREA       | CITY      | STATE     |
++---------+------------+-----------+-----------+
+|  560001 | MGROAD     | BANGALURU | KARNATAKA |
+|  560040 | vijaynagar | Bangaluru | Karnataka |
++---------+------------+-----------+-----------+
+2 rows in set (0.00 sec)
+
+
+2. UPDATE :This command is used to update or modify the records that are present in the table.
+
+syntax: UPDATE tablr_name
+        SET col_1=yal[,col_2=yal,..,col_n=yal]
+        WHERE filter_condition;
+
+>> updating the city from bangaluru to mangalore for 560001
+UPDATE LOCATION
+SET CITY='MANGALORE'
+WHERE PINCODE=560001;
+
+mysql> SELECT * FROM LOCATION;
++---------+------------+-----------+-----------+
+| PINCODE | AREA       | CITY      | STATE     |
++---------+------------+-----------+-----------+
+|  560001 | MGROAD     | MANGALORE | KARNATAKA |
+|  560040 | vijaynagar | Bangaluru | Karnataka |
++---------+------------+-----------+-----------+
+2 rows in set (0.00 sec)
+
+>>UPDATING area and city to kuvempunagar, Mysore for 560040
+UPDATE LOCATION
+SET AREA='Kuvempu Nagar' , CITY='Mysore'
+WHERE PINCODE=560040;
+
+mysql> SELECT * FROM LOCATION;
++---------+---------------+-----------+-----------+
+| PINCODE | AREA          | CITY      | STATE     |
++---------+---------------+-----------+-----------+
+|  560001 | MGROAD        | MANGALORE | KARNATAKA |
+|  560040 | Kuvempu Nagar | Mysore    | Karnataka |
++---------+---------------+-----------+-----------+
+2 rows in set (0.00 sec)
+
+>>UPDATING all the records in the table
+UPDATE LOCATION
+SET PINCODE=560001;
+
+ERROR 1062 (23000): Duplicate entry '560001' for key 'location.PRIMARY'
+
+
+
+3. DELETE  : This command is used to delete a particular record from the table
+
+syntax:
+DELETE FROM table_name
+WHERE filter_condition;
+
+>>deleting a particular record from the table
+DELETE FROM LOCATION
+WHERE AREA='MGROAD';
+
+mysql> SELECT * FROM LOCATION;
++---------+---------------+--------+-----------+
+| PINCODE | AREA          | CITY   | STATE     |
++---------+---------------+--------+-----------+
+|  560040 | Kuvempu Nagar | Mysore | Karnataka |
++---------+---------------+--------+-----------+
+1 row in set (0.00 sec)
+
+
+>>deleting all records from table
+DELETE FROM LOCATION;
+
+mysql> SELECT * FROM LOCATION;
+Empty set (0.00 sec)
+
+
+DIFFERENTIATE BETWEEN TRUNCATE DROP DELETE :-
+ 
+Truncate This command is used to erase all records permanently from the table but table structure remains same .
+SYNTAX:
+TRUNCATE TABLE table_name
+
+
+DROP :This command is used to delete the entire table from DB
+SYNTAX: 
+DROP TABLE table_name;
+
+DELETE : This command is used to delete the particular record from  the table 
+SYNTAX:
+DELETE FROM table_name
+WHERE filter_condition; 
+
+
+TCL (Transaction control language)
+-----------------------------------------------------------------------------------------------------------------------------------------
+1.COMMIT
+2.ROLLBACK
+3.SAVEPOINT
+
+
+DCL(Data control language)
+------------------------------------------------------------------------------------------------------------------------------------------
+1.GRANT
+2.REVOKE
+
+
+DQL(Data query language)
+------------------------------------------------------------------------------------------------------------------------------------------
+1.SELECT 
+2.PROJECTION

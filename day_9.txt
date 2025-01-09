@@ -1,0 +1,275 @@
+
+39.	write a query to display to emp fname lname IF THE EMP FIRST NAME ENDS WITH R
+
+
+SELECT FNAME,LNAME
+FROM EMP
+WHERE FNAME LIKE '%R';
+
++--------+-------+
+| FNAME  | LNAME |
++--------+-------+
+| Sameer | Khan  |
++--------+-------+
+1 row in set (0.01 sec)
+
+40	 WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP IF THE EMP JOB ROLE CONTAINS 'MAN' IN IT
+
+SELECT *
+FROM EMP
+WHERE JOB LIKE '%MAN%';
+
+-----+--------+-----------+------------+--------+----------+------+------------+-----------+---------+------+------+
+| EID  | FNAME  | LNAME     | DOB        | GENDER | JOB      | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+--------+-----------+------------+--------+----------+------+------------+-----------+---------+------+------+
+| 1701 | Rahul  | Mukharjee | 1991-02-19 | M      | Manager  | 1602 | 2017-04-17 | 100000.00 |    NULL |  111 | NULL |
+| 1702 | Sameer | Khan      | 1995-04-20 | M      | Manager  | 1602 | 2017-07-07 | 120000.00 |    NULL |  110 | NULL |
+| 1903 | Karan  | Bhat      | 1997-12-26 | M      | Salesman | 1701 | 2019-12-26 |  45000.00 |    NULL |  111 | NULL |
+| 2101 | Rashmi | Gowda     | 1995-10-03 | F      | Salesman | 1701 | 2021-01-02 |  45000.00 | 3000.00 |  111 | NULL |
+| 2104 | Aman   | Rai       | 1998-08-15 | M      | Salesman | 1701 | 2021-12-26 |  40000.00 |    NULL |  111 | NULL |
++------+--------+-----------+------------+--------+----------+------+------------+-----------+---------+------+------+
+5 rows in set (0.00 sec)
+
+41	WRITE THE QUERY TO DISPLAY THE EMP FNAME, IF THE EMP THIRD CHARACTER OF FNAME IS R
+
+mysql> SELECT FNAME
+    -> FROM EMP
+    -> WHERE FNAME LIKE '__R%';
++--------+
+| FNAME  |
++--------+
+| Fariya |
+| Karan  |
+| Kiran  |
+| Murali |
++--------+
+4 rows in set (0.00 sec)
+
+42	WRITE THE QUERY TO DISPLAY THE EMP FNAME IF EMP LAST 4TH CHAR MUST BE A
+
+SELECT FNAME
+FROM EMP
+WHERE FNAME LIKE '%A___';
+
++----------+
+| FNAME    |
++----------+
+| Aman     |
+| Karan    |
+| Rahul    |
+| Siddarth |
++----------+
+4 rows in set (0.00 sec)
+
+43	WRITE THE QUERY TO DISPLAY DETAILS OF EMP WHO WAS BORN DURING 1995 USING LIKE OPERATOR
+SELECT *
+FROM EMP
+WHERE DOB LIKE '1995%';
+
++------+--------+-------+------------+--------+----------+------+------------+-----------+---------+------+------+
+| EID  | FNAME  | LNAME | DOB        | GENDER | JOB      | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+--------+-------+------------+--------+----------+------+------------+-----------+---------+------+------+
+| 1702 | Sameer | Khan  | 1995-04-20 | M      | Manager  | 1602 | 2017-07-07 | 120000.00 |    NULL |  110 | NULL |
+| 2101 | Rashmi | Gowda | 1995-10-03 | F      | Salesman | 1701 | 2021-01-02 |  45000.00 | 3000.00 |  111 | NULL |
++------+--------+-------+------------+--------+----------+------+------------+-----------+---------+------+------+
+2 rows in set (0.00 sec)
+
+or
+
+mysql> SELECT *
+    -> FROM EMP
+    -> WHERE DOB LIKE '1995%-%-%';
++------+--------+-------+------------+--------+----------+------+------------+-----------+---------+------+------+
+| EID  | FNAME  | LNAME | DOB        | GENDER | JOB      | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+--------+-------+------------+--------+----------+------+------------+-----------+---------+------+------+
+| 1702 | Sameer | Khan  | 1995-04-20 | M      | Manager  | 1602 | 2017-07-07 | 120000.00 |    NULL |  110 | NULL |
+| 2101 | Rashmi | Gowda | 1995-10-03 | F      | Salesman | 1701 | 2021-01-02 |  45000.00 | 3000.00 |  111 | NULL |
++------+--------+-------+------------+--------+----------+------+------------+-----------+---------+------+------+
+2 rows in set (0.00 sec)
+
+
+
+
+44	WRITE THE QUERY TO DISPLAY EMP FNAME , DOJ IF THE EMP WAS HIRED IN THE MONTH OF JAN OR FAB
+SELECT FNAME,DOJ
+FROM EMP
+WHERE DOJ LIKE '%-01-%' OR DOJ LIKE '%-02-%' ;
+
++----------+------------+
+| FNAME    | DOJ        |
++----------+------------+
+| Siddarth | 2016-01-16 |
+| Rashmi   | 2021-01-02 |
++----------+------------+
+2 rows in set (0.00 sec)
+
+
+45	WRITE THE QUERY TO DISPLAY IF EMP FNAME START WITH S OR A
+
+SELECT *
+FROM EMP
+WHERE FNAME LIKE 'S%' OR FNAME LIKE 'A%';
+
++------+----------+-------+------------+--------+------------+------+------------+-----------+------+------+------+
+| EID  | FNAME    | LNAME | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL       | COMM | DNO  | CID  |
++------+----------+-------+------------+--------+------------+------+------------+-----------+------+------+------+
+| 1902 | Abhijit  | Gowda | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 |  50000.00 | NULL |  110 |  505 |
+| 2104 | Aman     | Rai   | 1998-08-15 | M      | Salesman   | 1701 | 2021-12-26 |  40000.00 | NULL |  111 | NULL |
+| 1702 | Sameer   | Khan  | 1995-04-20 | M      | Manager    | 1602 | 2017-07-07 | 120000.00 | NULL |  110 | NULL |
+| 1901 | Shivani  | Rai   | 1998-11-07 | F      | Tester     | 1601 | 2019-12-12 |  45000.00 | NULL |  113 |  502 |
+| 1601 | Siddarth | Patil | 1985-11-24 | M      | Ceo        | NULL | 2016-01-16 | 500000.00 | NULL |  113 | NULL |
++------+----------+-------+------------+--------+------------+------+------------+-----------+------+------+------+
+5 rows in set (0.00 sec)
+
+
+46.	WRITE THE QUERY TO DISPLAY EMP FNAME, LNAME IF THE EMP FIRST NAME STARTS WITH S OR A AND FIRST NAME ENDS WITH H OR N.
+
+SELECT FNAME,LNAME
+FROM EMP
+WHERE (FNAME LIKE 'S%' OR FNAME LIKE 'A%') AND (FNAME LIKE '%H' OR FNAME LIKE '%N');
+
++----------+-------+
+| FNAME    | LNAME |
++----------+-------+
+| Aman     | Rai   |
+| Siddarth | Patil |
++----------+-------+
+2 rows in set (0.00 sec)
+
+
+47.	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP FNAME STARTS WITH VOWELS.
+
+SELECT *
+FROM EMP
+WHERE FNAME LIKE 'A%' OR FNAME LIKE 'E%' OR FNAME LIKE 'I%' OR FNAME LIKE 'O%' OR FNAME LIKE 'U%';
+
+ 
++------+---------+-------+------------+--------+------------+------+------------+----------+------+------+------+
+| EID  | FNAME   | LNAME | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL      | COMM | DNO  | CID  |
++------+---------+-------+------------+--------+------------+------+------------+----------+------+------+------+
+| 1902 | Abhijit | Gowda | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 | 50000.00 | NULL |  110 |  505 |
+| 2104 | Aman    | Rai   | 1998-08-15 | M      | Salesman   | 1701 | 2021-12-26 | 40000.00 | NULL |  111 | NULL |
++------+---------+-------+------------+--------+------------+------+------------+----------+------+------+------+
+2 rows in set (0.00 sec)
+
+
+48	WRITE THE QUERY TO DISPLAY DETAILS OF EMP IF THE EMP FNAME DOESNOT START WITH S.
+
+SELECT * 
+FROM EMP
+WHERE FNAME NOT LIKE 'S%';
+
++------+---------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| EID  | FNAME   | LNAME     | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+---------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| 1602 | Hema    | Shetty    | 1996-03-20 | F      | Hr         | 1601 | 2016-10-20 | 150000.00 |    NULL |  114 |  507 |
+| 1701 | Rahul   | Mukharjee | 1991-02-19 | M      | Manager    | 1602 | 2017-04-17 | 100000.00 |    NULL |  111 | NULL |
+| 1801 | Jahnavi | Naik      | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
+| 1902 | Abhijit | Gowda     | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 |  50000.00 |    NULL |  110 |  505 |
+| 1903 | Karan   | Bhat      | 1997-12-26 | M      | Salesman   | 1701 | 2019-12-26 |  45000.00 |    NULL |  111 | NULL |
+| 2001 | Murali  | Krishnan  | 1998-06-08 | M      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
+| 2002 | Dharani | Patil     | 1998-11-10 | F      | Developer  | 1601 | 2021-06-20 |  30000.00 | 3000.00 |  113 | NULL |
+| 2101 | Rashmi  | Gowda     | 1995-10-03 | F      | Salesman   | 1701 | 2021-01-02 |  45000.00 | 3000.00 |  111 | NULL |
+| 2102 | Fariya  | Taj       | 1999-01-03 | F      | Developer  | 1601 | 2021-03-01 |  32000.00 | 3600.00 |  113 | NULL |
+| 2103 | Priya   | Shetty    | 1998-03-20 | F      | Accountant | 1602 | 2021-05-01 |  32000.00 | 3600.00 |  112 | NULL |
+| 2104 | Aman    | Rai       | 1998-08-15 | M      | Salesman   | 1701 | 2021-12-26 |  40000.00 |    NULL |  111 | NULL |
+| 2201 | Kiran   | Raj       | 1999-09-21 | M      | Accountant | 1602 | 2022-08-28 |  30000.00 | 3600.00 |  112 |  503 |
++------+---------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+12 rows in set (0.00 sec)
+
+49	WRITE THE QUERY TO DISPLAY DETAILS OF EMP WHOSE FNAME MUST NOT START WITH A OR S OR K
+
+SELECT *
+FROM EMP
+WHERE FNAME NOT LIKE 'A%' AND FNAME NOT LIKE 'S%' AND FNAME NOT LIKE 'K%'; 
+      
+                           / // NOT LIKE SO USE AND
+
++------+---------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| EID  | FNAME   | LNAME     | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+---------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| 1602 | Hema    | Shetty    | 1996-03-20 | F      | Hr         | 1601 | 2016-10-20 | 150000.00 |    NULL |  114 |  507 |
+| 1701 | Rahul   | Mukharjee | 1991-02-19 | M      | Manager    | 1602 | 2017-04-17 | 100000.00 |    NULL |  111 | NULL |
+| 1801 | Jahnavi | Naik      | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
+| 2001 | Murali  | Krishnan  | 1998-06-08 | M      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
+| 2002 | Dharani | Patil     | 1998-11-10 | F      | Developer  | 1601 | 2021-06-20 |  30000.00 | 3000.00 |  113 | NULL |
+| 2101 | Rashmi  | Gowda     | 1995-10-03 | F      | Salesman   | 1701 | 2021-01-02 |  45000.00 | 3000.00 |  111 | NULL |
+| 2102 | Fariya  | Taj       | 1999-01-03 | F      | Developer  | 1601 | 2021-03-01 |  32000.00 | 3600.00 |  113 | NULL |
+| 2103 | Priya   | Shetty    | 1998-03-20 | F      | Accountant | 1602 | 2021-05-01 |  32000.00 | 3600.00 |  112 | NULL |
++------+---------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+8 rows in set (0.00 sec)
+
+
+50	WRITE THE QUERY TO DISPLAY DETAILS OF EMP WHOSE FNAME STARTS VOWELS BUT LAST NAME NOT END WITH VOWELS.
+
+SELECT *
+FROM EMP
+WHERE (FNAME LIKE 'A%' OR FNAME LIKE 'E%' OR FNAME LIKE 'I%' OR FNAME LIKE 'O%' OR FNAME LIKE 'U%') AND (LNAME NOT LIKE '%A' AND  LNAME NOT LIKE '%E' AND  LNAME NOT LIKE '%I' AND LNAME NOT LIKE '%O' AND LNAME NOT LIKE '%U' );
+              
+Empty set (0.01 sec)
+
+
+===========================================================================================================================================================================
+51	WRITE THE QUERY TO DISPLAY DETAILS OF STUD IF THE STUD TABLE CONTAINS ATLEAST 1 % 
+
+SELECT *
+FROM STUD
+WHERE NAME LIKE '%\%%';
+mysql> SELECT *
+    -> FROM STUD
+    -> WHERE NAME LIKE '%\%%';
++------+-------------+
+| ID   | NAME        |
++------+-------------+
+|    1 | RANGA%SWAMY |
+|    3 | %AKASH%G    |
++------+-------------+
+2 rows in set (0.01 sec)
+
+mysql>
+
+//////'%%%'  = REMOVE POWER OF MIDDLE % BY GIVING  \ THAT IS '%\%%'
+
+52	WRITE THE QUERY TO DISPLAY DETAILS OF STUD IF THE STUD TABLE CONTAINS ATLEAST 1 _
+SELECT *
+FROM STUD
+WHERE NAME LIKE '%\_%';
+
++------+-------------+
+| ID   | NAME        |
++------+-------------+
+|    2 | SUMANTH_K_R |
+|    4 | PAVAN_MN    |
++------+-------------+
+2 rows in set (0.06 sec)
+
+
+53	WRITE THE QUERY TO DISPLAY DETAILS OF STUD IF THE STUD TABLE CONTAINS ATLEAST 2 %
+
+SELECT *
+FROM STUD
+WHERE NAME LIKE '%\%%\%%';
+
++------+----------+
+| ID   | NAME     |
++------+----------+
+|    3 | %AKASH%G |
++------+----------+
+1 row in set (0.00 sec)
+
+54	WRITE THE QUERY TO DISPLAY DETAILS OF STUD IF THE STUD TABLE CONTAINS ATLEAST 2 _ 
+
+SELECT *
+FROM STUD
+WHERE NAME LIKE '%\_%\_%'; 
+ 
++------+-------------+
+| ID   | NAME        |
++------+-------------+
+|    2 | SUMANTH_K_R |
++------+-------------+
+1 row in set (0.00 sec)
+
+
+
+
