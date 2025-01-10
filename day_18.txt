@@ -1,0 +1,167 @@
+
+126	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP WHO ARE GETTING SALARY MORE THAN KARANS SALERY
+
+SELECT *
+FROM EMP
+WHERE SAL > (SELECT SAL FROM EMP WHERE FNAME ='KARAN');
+ 
++------+----------+-----------+------------+--------+------------+------+------------+-----------+------+------+------+
+| EID  | FNAME    | LNAME     | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL       | COMM | DNO  | CID  |
++------+----------+-----------+------------+--------+------------+------+------------+-----------+------+------+------+
+| 1601 | Siddarth | Patil     | 1985-11-24 | M      | Ceo        | NULL | 2016-01-16 | 500000.00 | NULL |  113 | NULL |
+| 1602 | Hema     | Shetty    | 1996-03-20 | F      | Hr         | 1601 | 2016-10-20 | 150000.00 | NULL |  114 |  507 |
+| 1701 | Rahul    | Mukharjee | 1991-02-19 | M      | Manager    | 1602 | 2017-04-17 | 100000.00 | NULL |  111 | NULL |
+| 1702 | Sameer   | Khan      | 1995-04-20 | M      | Manager    | 1602 | 2017-07-07 | 120000.00 | NULL |  110 | NULL |
+| 1902 | Abhijit  | Gowda     | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 |  50000.00 | NULL |  110 |  505 |
++------+----------+-----------+------------+--------+------------+------+------------+-----------+------+------+------+
+5 rows in set (0.01 sec)
+
+
+127	WRITE THE QUERY TO DISPLAY THE EMP FNAME , SAL IF THE EMP IS GETTIN SALERY LESS THAN SAMEER
+
+SELECT FNAME , SAL 
+FROM EMP 
+WHERE SAL <  (SELECT SAL FROM EMP WHERE FNAME ='SAMEER');
+
++---------+-----------+
+| FNAME   | SAL       |
++---------+-----------+
+| Rahul   | 100000.00 |
+| Jahnavi |  45000.00 |
+| Shivani |  45000.00 |
+| Abhijit |  50000.00 |
+| Karan   |  45000.00 |
+| Murali  |  45000.00 |
+| Dharani |  30000.00 |
+| Rashmi  |  45000.00 |
+| Fariya  |  32000.00 |
+| Priya   |  32000.00 |
+| Aman    |  40000.00 |
+| Kiran   |  30000.00 |
++---------+-----------+
+12 rows in set (0.00 sec)
+
+128	WRITE THE QUERY TO DISPLAY THE DETAILS OF THE EMP FNAME ,SAL,JOB IF THE EMP IS WORKING AS SALESMAN AND GETTING SALERY MORE THAN DHARANI
+
+SELECT FNAME,SAL,JOB
+FROM EMP
+WHERE JOB ='SALESMAN' AND SAL > (SELECT SAL FROM EMP WHERE FNAME ='DHARANI'); 
+
++--------+----------+----------+
+| FNAME  | SAL      | JOB      |
++--------+----------+----------+
+| Karan  | 45000.00 | Salesman |
+| Rashmi | 45000.00 | Salesman |
+| Aman   | 40000.00 | Salesman |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+129	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP WHO IS ELDER THAN HEMA
+
+SELECT *
+FROM EMP
+WHERE DOB< (SELECT DOB FROM EMP WHERE FNAME ='HEMA') ;
+
++------+----------+-----------+------------+--------+----------+------+------------+-----------+---------+------+------+
+| EID  | FNAME    | LNAME     | DOB        | GENDER | JOB      | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+----------+-----------+------------+--------+----------+------+------------+-----------+---------+------+------+
+| 1601 | Siddarth | Patil     | 1985-11-24 | M      | Ceo      | NULL | 2016-01-16 | 500000.00 |    NULL |  113 | NULL |
+| 1701 | Rahul    | Mukharjee | 1991-02-19 | M      | Manager  | 1602 | 2017-04-17 | 100000.00 |    NULL |  111 | NULL |
+| 1702 | Sameer   | Khan      | 1995-04-20 | M      | Manager  | 1602 | 2017-07-07 | 120000.00 |    NULL |  110 | NULL |
+| 2101 | Rashmi   | Gowda     | 1995-10-03 | F      | Salesman | 1701 | 2021-01-02 |  45000.00 | 3000.00 |  111 | NULL |
++------+----------+-----------+------------+--------+----------+------+------------+-----------+---------+------+------+
+4 rows in set (0.00 sec)
+
+
+130	 write THE QUERY TO DISPLAY THE DETAILS OF EMP WHO ARE WORKING IN SAME DEPT AS RAHUL DEPT AND GETTING SALEERY MORE THAN KIRAN
+
+SELECT *
+FROM EMP
+WHERE DNO = (SELECT DNO FROM EMP WHERE FNAME ='RAHUL' ) AND SAL > (SELECT SAL FROM EMP WHERE FNAME ='KIRAN');
+
++------+--------+-----------+------------+--------+----------+------+------------+-----------+---------+------+------+
+| EID  | FNAME  | LNAME     | DOB        | GENDER | JOB      | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+--------+-----------+------------+--------+----------+------+------------+-----------+---------+------+------+
+| 1701 | Rahul  | Mukharjee | 1991-02-19 | M      | Manager  | 1602 | 2017-04-17 | 100000.00 |    NULL |  111 | NULL |
+| 1903 | Karan  | Bhat      | 1997-12-26 | M      | Salesman | 1701 | 2019-12-26 |  45000.00 |    NULL |  111 | NULL |
+| 2101 | Rashmi | Gowda     | 1995-10-03 | F      | Salesman | 1701 | 2021-01-02 |  45000.00 | 3000.00 |  111 | NULL |
+| 2104 | Aman   | Rai       | 1998-08-15 | M      | Salesman | 1701 | 2021-12-26 |  40000.00 |    NULL |  111 | NULL |
++------+--------+-----------+------------+--------+----------+------+------------+-----------+---------+------+------+
+4 rows in set (0.00 sec)
+
+131	WRITE THE QUERY THE DETAILS OF EMP WHO ARE GETTING SALERY MORE THAN PRIYAS SALERY BUT LESS THAN SAMEERS SALERY
+
+
+SELECT *
+FROM EMP
+WHERE SAL > (SELECT SAL FROM EMP WHERE FNAME ='PRIYA') AND SAL < (SELECT SAL FROM EMP WHERE FNAME ='SAMEER');
+
++------+---------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| EID  | FNAME   | LNAME     | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+---------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| 1701 | Rahul   | Mukharjee | 1991-02-19 | M      | Manager    | 1602 | 2017-04-17 | 100000.00 |    NULL |  111 | NULL |
+| 1801 | Jahnavi | Naik      | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
+| 1901 | Shivani | Rai       | 1998-11-07 | F      | Tester     | 1601 | 2019-12-12 |  45000.00 |    NULL |  113 |  502 |
+| 1902 | Abhijit | Gowda     | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 |  50000.00 |    NULL |  110 |  505 |
+| 1903 | Karan   | Bhat      | 1997-12-26 | M      | Salesman   | 1701 | 2019-12-26 |  45000.00 |    NULL |  111 | NULL |
+| 2001 | Murali  | Krishnan  | 1998-06-08 | M      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
+| 2101 | Rashmi  | Gowda     | 1995-10-03 | F      | Salesman   | 1701 | 2021-01-02 |  45000.00 | 3000.00 |  111 | NULL |
+| 2104 | Aman    | Rai       | 1998-08-15 | M      | Salesman   | 1701 | 2021-12-26 |  40000.00 |    NULL |  111 | NULL |
++------+---------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+8 rows in set (0.00 sec)
+
+132	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP WHO ARE JOINED AFTER RAHUL
+
+SELECT *
+FROM EMP 
+WHERE DOJ > (SELECT DOJ FROM EMP WHERE FNAME = 'RAHUL');
+
++------+---------+----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| EID  | FNAME   | LNAME    | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+---------+----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| 1702 | Sameer  | Khan     | 1995-04-20 | M      | Manager    | 1602 | 2017-07-07 | 120000.00 |    NULL |  110 | NULL |
+| 1801 | Jahnavi | Naik     | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
+| 1901 | Shivani | Rai      | 1998-11-07 | F      | Tester     | 1601 | 2019-12-12 |  45000.00 |    NULL |  113 |  502 |
+| 1902 | Abhijit | Gowda    | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 |  50000.00 |    NULL |  110 |  505 |
+| 1903 | Karan   | Bhat     | 1997-12-26 | M      | Salesman   | 1701 | 2019-12-26 |  45000.00 |    NULL |  111 | NULL |
+| 2001 | Murali  | Krishnan | 1998-06-08 | M      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
+| 2002 | Dharani | Patil    | 1998-11-10 | F      | Developer  | 1601 | 2021-06-20 |  30000.00 | 3000.00 |  113 | NULL |
+| 2101 | Rashmi  | Gowda    | 1995-10-03 | F      | Salesman   | 1701 | 2021-01-02 |  45000.00 | 3000.00 |  111 | NULL |
+| 2102 | Fariya  | Taj      | 1999-01-03 | F      | Developer  | 1601 | 2021-03-01 |  32000.00 | 3600.00 |  113 | NULL |
+| 2103 | Priya   | Shetty   | 1998-03-20 | F      | Accountant | 1602 | 2021-05-01 |  32000.00 | 3600.00 |  112 | NULL |
+| 2104 | Aman    | Rai      | 1998-08-15 | M      | Salesman   | 1701 | 2021-12-26 |  40000.00 |    NULL |  111 | NULL |
+| 2201 | Kiran   | Raj      | 1999-09-21 | M      | Accountant | 1602 | 2022-08-28 |  30000.00 | 3600.00 |  112 |  503 |
++------+---------+----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+12 rows in set (0.00 sec)
+
+133	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP FNAME , DOJ IF THE EMP JOINED TWO YEARS AFTER JHANAVIS DOJ.
+
+SELECT FNAME , DOJ
+FROM EMP
+WHERE YEAR(DOJ)>=(SELECT YEAR(DOJ)+2 FROM EMP WHERE FNAME = 'JAHNAVI');
++-------+------------+
+| FNAME | DOJ        |
++-------+------------+
+| Kiran | 2022-08-28 |
++-------+------------+
+1 row in set (0.00 sec)
+
+
+OR
+
+SELECT FNAME,DOJ
+FROM EMP 
+WHERE DOJ > (SELECT DATE_ADD(DOJ,INTERVAL 2 YEAR) FROM EMP WHERE FNAME = 'JAHNAVI');
+
++-------+------------+
+| FNAME | DOJ        |
++-------+------------+
+| Kiran | 2022-08-28 |
++-------+------------+
+1 row in set (0.00 sec)
+
+134	WRITE THE QUERY THE DETAILS OF EMP WHO WERE BORN TWO YEARS BEFORE THE DOB OF MURALI.
+
+SELECT *
+FROM EMP
+WHERE YEAR(DOB)<(SELECT YEAR(DOB)-2 FROM EMP WHERE FNAME = 'MURALI');
