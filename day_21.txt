@@ -1,0 +1,137 @@
+
+152	write aquery to display the details of kirans manager
+**
+
+SELECT * FROM EMP WHERE EID IN(SELECT MGR FROM EMP WHERE FNAME="KIRAN");
+
++------+-------+--------+------------+--------+-----+------+------------+-----------+------+------+------+
+| EID  | FNAME | LNAME  | DOB        | GENDER | JOB | MGR  | DOJ        | SAL       | COMM | DNO  | CID  |
++------+-------+--------+------------+--------+-----+------+------------+-----------+------+------+------+
+| 1602 | Hema  | Shetty | 1996-03-20 | F      | Hr  | 1601 | 2016-10-20 | 150000.00 | NULL |  114 |  507 |
++------+-------+--------+------------+--------+-----+------+------------+-----------+------+------+------+
+1 row in set (0.02 sec)
+
+153	write the query to display the emp fname ,lname ,job role and dno of Rahuls manager in the below format
+
+MANAGER_INFO
+----------------
+SIDDARTH.P ,(CEO)-113
+
+
+
+
+SELECT  CONCAT(FNAME,'.',SUBSTR(LNAME,1,1)," ",JOB,'-',DNO)MANAGER_INFO FROM EMP WHERE eid in
+(SELECT MGR FROM EMP WHERE FNAME ="RAHUL");
+
++---------------+
+| MANAGER_INFO  |
++---------------+
+| Hema.S Hr-114 |
++---------------+
+1 row in set (0.00 sec)
+
+15 rows in set (0.00 sec)
+
+154 WAQTD THE DEPT NAME OF PRIYAS MANAGER
+
+mysql> SELECT DNAME FROM DEPT WHERE DNO in
+    -> (select dno from emp where eid in
+    -> (SELECT mgr FROM EMP WHERE FNAME ="PRIYA"));
++-------+
+| DNAME |
++-------+
+| HR    |
++-------+
+1 row in set (0.00 sec)
+
+155 WAQTD THE DETAILS OF LOCATION WHERE HEMAS MANAGER IS WORKING
+
+
+
+select location from location where lid in
+(select lid from dept where dno in
+(select dno from emp where eid in
+(select mgr from emp where fname ="hema")));
+
++-------------+
+| location    |
++-------------+
+| Koramangala |
++-------------+
+1 row in set (0.00 sec)
+
+156	waqtd THE DETAILS OF EMP WHO ARE REPORTING TO SAMEER
+
+SELECT *
+FROM EMP WHERE MGR IN(SELECT EID FROM  EMP WHERE FNAME = "SAMEER");
+
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+| EID  | FNAME   | LNAME    | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL      | COMM    | DNO  | CID  |
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+| 1801 | Jahnavi | Naik     | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 | 45000.00 | 1000.00 |  110 | NULL |
+| 1902 | Abhijit | Gowda    | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 | 50000.00 |    NULL |  110 |  505 |
+| 2001 | Murali  | Krishnan | 1998-06-08 | M      | Dispatcher | 1702 | 2020-03-15 | 45000.00 | 1000.00 |  110 | NULL |
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+3 rows in set (0.00 sec)
+
+157	WAQTD THE DEPT NAME OF EMP WHO ARE REPORTING TO RAHUL
+
+SELECT DNAME FROM DEPT WHERE DNO IN
+(SELECT DNO FROM EMP WHERE MGR IN
+(SELECT EID FROM  EMP WHERE FNAME = "RAHUL"));
+
++-----------+
+| DNAME     |
++-----------+
+| Marketing |
++-----------+
+1 row in set (0.00 sec)
+
+158 WAQTD THE DETAILS OF EMP WHO ARE REPORTING TO KARAN'S MANAGER
+
+SELECT * FROM EMP WHERE MGR IN 
+(SELECT MGR FROM EMP WHERE FNAME="KARAN");
++------+--------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| EID  | FNAME  | LNAME     | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+--------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| 1701 | Rahul  | Mukharjee | 1991-02-19 | M      | Manager    | 1602 | 2017-04-17 | 100000.00 |    NULL |  111 | NULL |
+| 1702 | Sameer | Khan      | 1995-04-20 | M      | Manager    | 1602 | 2017-07-07 | 120000.00 |    NULL |  110 | NULL |
+| 2103 | Priya  | Shetty    | 1998-03-20 | F      | Accountant | 1602 | 2021-05-01 |  32000.00 | 3600.00 |  112 | NULL |
+| 2201 | Kiran  | Raj       | 1999-09-21 | M      | Accountant | 1602 | 2022-08-28 |  30000.00 | 3600.00 |  112 |  503 |
++------+--------+-----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+4 rows in set (0.00 sec)
+
+159	WAQTD THE DETAILS OF EMP WHO ARE NOT THE REPORTING MANAGER
+
+mysql> SELECT * FROM EMP WHERE EID NOT IN(SELECT MGR FROM EMP WHERE MGR IS NOT NULL);
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+| EID  | FNAME   | LNAME    | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL      | COMM    | DNO  | CID  |
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+| 1801 | Jahnavi | Naik     | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 | 45000.00 | 1000.00 |  110 | NULL |
+| 1901 | Shivani | Rai      | 1998-11-07 | F      | Tester     | 1601 | 2019-12-12 | 45000.00 |    NULL |  113 |  502 |
+| 1902 | Abhijit | Gowda    | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 | 50000.00 |    NULL |  110 |  505 |
+| 1903 | Karan   | Bhat     | 1997-12-26 | M      | Salesman   | 1701 | 2019-12-26 | 45000.00 |    NULL |  111 | NULL |
+| 2001 | Murali  | Krishnan | 1998-06-08 | M      | Dispatcher | 1702 | 2020-03-15 | 45000.00 | 1000.00 |  110 | NULL |
+| 2002 | Dharani | Patil    | 1998-11-10 | F      | Developer  | 1601 | 2021-06-20 | 30000.00 | 3000.00 |  113 | NULL |
+| 2101 | Rashmi  | Gowda    | 1995-10-03 | F      | Salesman   | 1701 | 2021-01-02 | 45000.00 | 3000.00 |  111 | NULL |
+| 2102 | Fariya  | Taj      | 1999-01-03 | F      | Developer  | 1601 | 2021-03-01 | 32000.00 | 3600.00 |  113 | NULL |
+| 2103 | Priya   | Shetty   | 1998-03-20 | F      | Accountant | 1602 | 2021-05-01 | 32000.00 | 3600.00 |  112 | NULL |
+| 2104 | Aman    | Rai      | 1998-08-15 | M      | Salesman   | 1701 | 2021-12-26 | 40000.00 |    NULL |  111 | NULL |
+| 2201 | Kiran   | Raj      | 1999-09-21 | M      | Accountant | 1602 | 2022-08-28 | 30000.00 | 3600.00 |  112 |  503 |
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+11 rows in set (0.00 sec)
+
+160	WAQTD THE NUMBER OF EMPS REPORTING TO EVERY MANAGER
+
+ SELECT COUNT(*),MGR FROM EMP WHERE MGR IS NOT NULL GROUP BY MGR;
++----------+------+
+| COUNT(*) | MGR  |
++----------+------+
+|        4 | 1601 |
+|        4 | 1602 |
+|        3 | 1702 |
+|        3 | 1701 |
++----------+------+
+4 rows in set (0.00 sec)
+
+161	WAQTD THE DETAILS OF EMP WHO HAS ATLEAST 4 EMPS REPORTING TO THEM

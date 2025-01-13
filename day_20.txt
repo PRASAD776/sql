@@ -1,0 +1,110 @@
+143	WAQTD THE DETAILS OF EMP IF THE EMP IS WORKING IN KORMANGALA
+
+select * from emp where dno =(select dno from dept where lid
+= (select lid from location where location = 'koramangala'));
++------+----------+-------+------------+--------+-----------+------+------------+-----------+---------+------+------+
+| EID  | FNAME    | LNAME | DOB        | GENDER | JOB       | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+----------+-------+------------+--------+-----------+------+------------+-----------+---------+------+------+
+| 1601 | Siddarth | Patil | 1985-11-24 | M      | Ceo       | NULL | 2016-01-16 | 500000.00 |    NULL |  113 | NULL |
+| 1901 | Shivani  | Rai   | 1998-11-07 | F      | Tester    | 1601 | 2019-12-12 |  45000.00 |    NULL |  113 |  502 |
+| 2002 | Dharani  | Patil | 1998-11-10 | F      | Developer | 1601 | 2021-06-20 |  30000.00 | 3000.00 |  113 | NULL |
+| 2102 | Fariya   | Taj   | 1999-01-03 | F      | Developer | 1601 | 2021-03-01 |  32000.00 | 3600.00 |  113 | NULL |
++------+----------+-------+------------+--------+-----------+------+------------+-----------+---------+------+------+
+4 rows in set (0.00 sec)
+
+144	WAQTD THE  EMP  FULLNAM , SLERY , ANNUAL SALERY IF THE EMP IS WORKING IN IT department
+
+select concat(fname,'',lname)fullname,sal,sal*12 from emp where dno = (select dno from dept where dname = 'it');
++----------------+-----------+------------+
+| fullname       | sal       | sal*12     |
++----------------+-----------+------------+
+| Siddarth Patil | 500000.00 | 6000000.00 |
+| Shivani Rai    |  45000.00 |  540000.00 |
+| Dharani Patil  |  30000.00 |  360000.00 |
+| Fariya Taj     |  32000.00 |  384000.00 |
++----------------+-----------+------------+
+4 rows in set (0.00 sec)
+
+145 	Waqtd THE DEPT NAME OF THE EMP IF THE EMP IS GETTING SALERY MORE THAN PRIYA
+
+SELECT DNAME FROM DEPT WHERE DNO IN(SELECT DNO FROM EMP WHERE SAL > (SELECT SAL FROM EMP WHERE FNAME ='PRIYA'));
++-----------+
+| DNAME     |
++-----------+
+| Sales     |
+| Marketing |
+| IT        |
+| HR        |
++-----------+
+4 rows in set (0.01 sec)
+
+146	WAQTD THE CUSTOMER FULL NAME WHO HAS PURCHASED SMART PHONE
+
+SELECT CONCAT(FIRST_NAME,' ', LAST_NAME)FULLNAME  FROM CUSTOMER WHERE CID IN(SELECT CID FROM ORDERS WHERE PRODUCT_ID IN(SELECT PRODUCT_ID FROM PRODUCT WHERE PNAME= 'SMARTPHONE')); 
+
++---------------+
+| FULLNAME      |
++---------------+
+| Abhijit Gowda |
+| Vinay Iyer    |
++---------------+
+2 rows in set (0.00 sec)
+
+147	WAQTD THE LOCATION OF THE EMPS WHO ARE WORKING AS SALESMAN
+
+SELECT LOCATION FROM LOCATION WHERE LID IN(SELECT LID FROM DEPT WHERE DNO IN(SELECT DNO FROM EMP WHERE JOB ='SALESMAN'));
+
++----------+
+| LOCATION |
++----------+
+| T. Nagar |
++----------+
+1 row in set (0.00 sec)
+
+148	WAQTD THE DETAILS OF EMPS WHO DELIVERS THE PRODUCT TO CHENNAI 
+
+
+SELECT * FROM EMP WHERE EID IN(SELECT EID FROM ORDERS WHERE CID IN(SELECT CID FROM CUSTOMER WHERE LID IN(SELECT LID FROM LOCATION WHERE CITY='CHENNAI')));
+
++------+---------+-------+------------+--------+------------+------+------------+----------+---------+------+------+
+| EID  | FNAME   | LNAME | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL      | COMM    | DNO  | CID  |
++------+---------+-------+------------+--------+------------+------+------------+----------+---------+------+------+
+| 1801 | Jahnavi | Naik  | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 | 45000.00 | 1000.00 |  110 | NULL |
++------+---------+-------+------------+--------+------------+------+------------+----------+---------+------+------+
+1 row in set (0.00 sec)
+
+148	WAQTD THE LOCATION ,CITY ,STATE OF CUSTOMERS IN THE BELOW FORMAT WHO HAS ORDERED THE HEADPHONES
+
+SELECT LOCATION,CITY ,STATE FROM LOCATION WHERE LID IN 
+(SELECT LID FROM CUSTOMER WHERE CID IN
+(SELECT CID FROM ORDERS WHERE PRODUCT_ID IN
+(SELECT PRODUCT_ID FROM PRODUCT WHERE PNAME= 'HEADPHONES')));
+
++---------------+-----------+----------------+
+| LOCATION      | CITY      | STATE          |
++---------------+-----------+----------------+
+| Hitech City   | Hyderabad | Telangana      |
+| Fort Kochi    | Kochi     | Kerala         |
+| Chandragiri   | Tirupati  | Andhra Pradesh |
+| Kondalampatti | Salem     | Tamil Nadu     |
++---------------+-----------+----------------+
+4 rows in set (0.00 sec)
+
+149 	WAQTD THE DETAILS OF EMP WHO ARE WORKING AS DELIVERY BOY
+
+
+SELECT * FROM EMP WHERE EID IN(
+SELECT EID FROM ORDERS);
+
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+| EID  | FNAME   | LNAME    | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL      | COMM    | DNO  | CID  |
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+| 1801 | Jahnavi | Naik     | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 | 45000.00 | 1000.00 |  110 | NULL |
+| 1902 | Abhijit | Gowda    | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 | 50000.00 |    NULL |  110 |  505 |
+| 2001 | Murali  | Krishnan | 1998-06-08 | M      | Dispatcher | 1702 | 2020-03-15 | 45000.00 | 1000.00 |  110 | NULL |
++------+---------+----------+------------+--------+------------+------+------------+----------+---------+------+------+
+3 rows in set (0.00 sec)  
+
+150	WAQTD THE DETAILS OF PRODUCT WHICH HAS NOT BEEN ORDERED SO FAR
+
+151	WAQTD THE LOCATIONS WHERE NO ORDERS HAS BEEN DELIVERED 

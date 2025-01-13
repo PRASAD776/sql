@@ -1,0 +1,105 @@
+135	WRITE THE QUERY TO DISPLAY THE DEPT NAME OF AMAN
+
+SELECT DNAME FROM DEPT WHERE DNO=(SELECT DNO
+FROM EMP 
+WHERE FNAME = 'AMAN');
+
++-----------+
+| DNAME     |
++-----------+
+| Marketing |
++-----------+
+1 row in set (0.00 sec)
+
+136	WRITE THE QUERY TO DISPLAY ṬHE DETAILS OF THE LOCATION OF A MARKETING DEPT
+
+
+SELECT LOCATION 
+FROM LOCATION WHERE LID = (SELECT LID  FROM DEPT WHERE DNAME = 'MARKETING');
+
++----------+
+| LOCATION |
++----------+
+| T. Nagar |
++----------+
+1 row in set (0.00 sec)
+
+137	write the query to display the dept name of karan
+
+select dname
+from dept
+where dno = (select dno from emp where fname = 'karan'); 
+
++-----------+
+| dname     |
++-----------+
+| Marketing |
++-----------+
+1 row in set (0.00 sec)
+
+
+138	WRITE THE QUERY TO DISPLAY THE DETAILS OF CUSTOMER WHO LIVE IN KORMANGALA
+
+
+select * from customer where lid = (select lid   from location where location ='koramangala');
+
++-----+------------+-----------+------+
+| CID | FIRST_NAME | LAST_NAME | LID  |
++-----+------------+-----------+------+
+| 503 | Kiran      | Raj       |  201 |
+| 517 | Mohan      | Nambiar   |  201 |
++-----+------------+-----------+------+
+2 rows in set (0.00 sec)
+
+139	WRITE THE QUERY TO DISPLAY THE DETAILS OF EMP WHO WORKS IN SALES DEPT.
+
+select * from emp where dno = (select dno from dept where dname ='sales');
+
++------+---------+----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| EID  | FNAME   | LNAME    | DOB        | GENDER | JOB        | MGR  | DOJ        | SAL       | COMM    | DNO  | CID  |
++------+---------+----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+| 1702 | Sameer  | Khan     | 1995-04-20 | M      | Manager    | 1602 | 2017-07-07 | 120000.00 |    NULL |  110 | NULL |
+| 1801 | Jahnavi | Naik     | 1996-04-11 | F      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
+| 1902 | Abhijit | Gowda    | 1997-12-25 | M      | Dispatcher | 1702 | 2019-12-28 |  50000.00 |    NULL |  110 |  505 |
+| 2001 | Murali  | Krishnan | 1998-06-08 | M      | Dispatcher | 1702 | 2020-03-15 |  45000.00 | 1000.00 |  110 | NULL |
++------+---------+----------+------------+--------+------------+------+------------+-----------+---------+------+------+
+4 rows in set (0.00 sec)
+
+140	write a query to display the emp fullname and dept no if the emp is working in IT dept
+  
+select concat(fname , lname )fullname from emp where dno = (select dno  from dept where dname ='IT');
+
++---------------+
+| fullname      |
++---------------+
+| SiddarthPatil |
+| ShivaniRai    |
+| DharaniPatil  |
+| FariyaTaj     |
++---------------+
+4 rows in set (0.00 sec)
+
+141	write a query to display the details of customer who has ordered the product
+
+SELECT * FROM CUSTOMER WHERE CID IN(SELECT CID FROM ORDERS);
++-----+------------+-----------+------+
+| CID | FIRST_NAME | LAST_NAME | LID  |
++-----+------------+-----------+------+
+| 501 | Ravi       | Kumar     |  203 |
+| 502 | Shivani    | Rai       |  205 |
+| 503 | Kiran      | Raj       |  201 |
+| 505 | Abhijit    | Gowda     |  206 |
+| 506 | Kiran      | Das       |  204 |
+| 507 | Hema       | Shetty    |  213 |
+| 508 | Nisha      | Pillai    |  202 |
+| 509 | Vinay      | Iyer      |  210 |
+| 510 | Meera      | Suresh    |  215 |
+| 511 | Raghav     | Rani      |  209 |
+| 512 | Lakshmi    | Patil     |  204 |
+| 514 | Kavya      | Nair      |  211 |
+| 515 | Pranav     | Shetty    |  202 |
++-----+------------+-----------+------+
+13 rows in set (0.00 sec)
+
+142	write a query to display the details of customer who has ordered the product in Chennai city
+
