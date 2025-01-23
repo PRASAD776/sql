@@ -226,7 +226,7 @@ GROUP BY C1.FIRST_NAME;
 |      35497.00 | Andhra Pradesh |
 +---------------+----------------+
 -----------------------------------------------------------------------------------------------------------------------------------
-203. WAQTD THE TOTAL REVENUE GENERATED FROM EVERY STATE,
+203. WAQTD THE TOTAL REVENUE GENERATED FROM EVERY STATE,EVERY MONTH.
 
 SELECT SUM(P1.PRICE)"TOTAL REVENUE" ,DATE_FORMAT(O1.ORDER_DATE,'%M')MONTH,L1.STATE FROM PRODUCT P1 INNER JOIN ORDERS O1 ON P1.PRODUCT_ID=O1.PRODUCT_ID INNER JOIN CUSTOMER C1 ON O1.CID=C1.CID INNER JOIN LOCATION L1 ON C1.LID=L1.LID  GROUP BY STATE, MONTH;
 +---------------+--------+----------------+
@@ -252,4 +252,4 @@ SELECT SUM(P1.PRICE)"TOTAL REVENUE" ,DATE_FORMAT(O1.ORDER_DATE,'%M')MONTH,L1.STA
 |       1499.00 | April  | Telangana      |
 |       6499.00 | July   | Telangana      |
 +---------------+--------+----------------+
-EVERY MONTH.
+
