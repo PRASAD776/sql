@@ -1,0 +1,112 @@
+160. WAQTD THE NUMBER OF EMPS REPORTING TO EVERY 
+MANAGERS.
+SELECT COUNT(*),MGR
+FROM EMP
+WHERE MGR IS NOT NULL
+GROUP BY MGR;
+---------------------------------------------------------------------------------------------------------------
+161. WAQTD THE DETAILS OF EMP WHO HAS ATLEAST 4 EMPS 
+REPORTING TO THEM.
+SELECT * FROM EMP WHERE EID IN
+(SELECT MGR
+ FROM EMP
+GROUP BY MGR
+HAVING COUNT(*) =4);
+-----------------------------------------------------------------------------------------------
+162. WAQTD THE DETAILS OF EMP IF THE EMP HAS EXACTLY 3 
+REPORTINGS.
+
+164. WAQTD THE DETAILS OF EMP WHO GETS 3RD MINIMUM 
+SALARY.
+
+SELECT * FROM EMP WHERE SAL=
+(SELECT DISTINCT SAL FROM EMP ORDER BY SAL ASC LIMIT 1 
+OFFSET 2);
+
+------------------------------------------------------------------------------------------------
+165. WAQTD THE DETAILS OF TOP 3 MINIMUM SALARY HOLDERS.
+SELECT * FROM EMP WHERE SAL IN
+(SELECT SAL FROM
+(SELECT DISTINCT SAL FROM EMP ORDER BY SAL ASC LIMIT 3) 
+RESULT);
+-----------------------------------------------------------------------------------------------
+163. WAQTD THE DETAILS OF TOP 3 MOST SOLD PRODUCT.
+SELECT * FROM PRODUCT WHERE PRODUCT_ID IN
+(SELECT PRODUCT_ID FROM
+(SELECT COUNT(*),PRODUCT_ID
+FROM ORDERS
+GROUP BY PRODUCT_ID
+ORDER BY COUNT(*) DESC
+LIMIT 3) RESULT);
+-----------------------------------------------------------------------------------------------
+166. WAQTD THE TOP 3 CUSTOMERS WHO HAS MOST NUMBER OF 
+ORDERS.
+SELECT * FROM CUSTOMER WHERE CID IN
+(SELECT CID FROM
+(SELECT CID FROM ORDERS
+ GROUP BY CID
+ORDER BY COUNT(*) DESC
+LIMIT 3) RESULT);
+------------------------------------------------------------------------------------------------
+167. WAQTD THE TOTAL NUMBER OF PRODUCTS SOLD EVERY 
+MONTH.
+SELECT COUNT(*) 
+Total_products,DATE_FORMAT(ORDER_DATE,'%M') Month
+FROM ORDERS
+GROUP BY DATE_FORMAT(ORDER_DATE,'%M');
+168. WAQTD THE DETAILS OF EMP WHO IS GETTING SALARY MORE
+THAN AVG SALARY OF DNO 112.
+SELECT * FROM EMP WHERE SAL>
+(SELECT AVG(SAL) FROM EMP WHERE DNO=112);
+----------------------------------------------------------------------------------------------------
+Co-related Subquery
+
+In this case, not only outer query depends upon the 
+inner query but also inner query depends upon the outer 
+query for the final result.
+
+169. WAQTD THE DETAILS OF EMP WHO IS GETTING SALARY MORE
+THAN AVG SALARY OF HIS DEPT.
+SELECT * FROM EMP E1 WHERE SAL>
+(SELECT AVG(SAL) FROM EMP WHERE DNO=E1.DNO);
+
+-----------------------------------------------------------------------------------------------------
+170. WAQTD THE DETAILS OF EMP WHO ARE ELDER THAN THEIR 
+MANAGERS.
+SELECT * FROM EMP E1 WHERE DOB<
+(SELECT DOB FROM EMP WHERE EID=E1.MGR);
+-----------------------------------------------------------------------------------------------------
+171. WAQTD THE DETAILS OF EMP WHO ARE HAVING SAME GENDER
+AS THEIR MANAGER GENDER.
+SELECT * FROM EMP E1 WHERE GENDER IN
+(SELECT GENDER FROM EMP WHERE EID=E1.MGR);
+-----------------------------------------------------------------------------------------------------
+172. WAQTD THE DETAILS OF EMP WHO ARE GETTING SALARY 
+MORE THAN MURALI.
+SELECT * FROM EMP WHERE SAL>
+(SELECT SAL FROM EMP WHERE FNAME='MURALI');
+-----------------------------------------------------------------------------------------------------
+173. WAQTD THE DETAILS OF EMP WHO ARE GETTING SALARY 
+MORE THAN SALESMAN.
+SELECT * FROM EMP WHERE SAL>
+(SELECT MAX(SAL) FROM EMP WHERE JOB='SALESMAN');
+OR
+SELECT * FROM EMP WHERE SAL>ALL
+(SELECT SAL FROM EMP WHERE JOB='SALESMAN');
+----------------------------------------------------------------------------------
+ALL/ANY OPERATOR
+
+These operators are the multivalued operators which 
+accept single value at LHS and multiple values at RHS.
+Syntax: column_name >/< ALL/ANY (v1,v2,v3,ބవ ,vn);
+> ALL operator works in the form of AND operator.
+> ANY operator works in the form of OR operator.
+---------------------------------------------------------------------------------
+174. WAQTD THE DETAILS OF EMP WHO ARE GETTING SALARY 
+MORE THAN ANY OF THE DISPATCHER.
+
+Drawbacks of Sub Query
+
+> It is difficult to connect multiple tables.
+> We cannot able to get the data from two different 
+tables at once.

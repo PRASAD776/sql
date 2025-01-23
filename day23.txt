@@ -1,0 +1,95 @@
+JOINS
+------------------------------------------------------------------------------------------------------------------------
+Joins are used to retrieve the data from multiple tables
+simultaneously.
+--------------------------------------
+Types of Joins
+
+1. Cartesian Join (Cross Join) [depricated]
+2. Inner Join
+3. Outer Join
+ ޲ન Left Outer Join
+ ޲ન Right Outer Join
+ ޲ન Full Outer Join (By using UNION operator)
+4. Self Join
+5. Natural Join [depricated]
+------------------------------------------------------------------------------------------------------------------------------
+CROSS JOIN
+==========
+In this type of Join, the records of table 1 will be 
+merged with records of table 2.
+Whenever we come across Joins, 
+the number of rows generated: 
+no. of rows in table 1 * no. of rows in table 2.
+the number of columns generated: 
+no. of columns in table 1 + no. of columns in table 2.
+
+
+Syntax: 
+SELECT column_name
+FROM table_1 CROSS JOIN table_2;
+Drawback:
+જચચચચચચછ
+We get more invalid records or error records when 
+compared to valid records.
+======================================================
+===================================================
+INNER JOINS
+==========
+Inner Joins are used to obtain only the matched records.
+Syntax:
+SELECT column_name
+FROM table_name_1 INNER JOIN table_name_2
+ON table_name_1.column_name=table_name_2.column_name;
+------------------------------------------------------------------------------
+175. WAQTD THE EMP FNAME ALONG WITH DEPT NAME.
+SELECT FNAME,DNAME
+FROM EMP INNER JOIN DEPT 
+ON EMP.DNO=DEPT.DNO;
+------------------------------------------------------------------------------
+176. WAQTD THE CUSTOMER FULLNAME AND HIS LOCATION.
+SELECT CONCAT(FIRST_NAME,' ',LAST_NAME) 
+FULLNAME,LOCATION
+FROM CUSTOMER INNER JOIN LOCATION
+ON CUSTOMER.LID=LOCATION.LID;
+or
+SELECT CONCAT(FIRST_NAME,' ',LAST_NAME) 
+FULLNAME,LOCATION
+FROM CUSTOMER C1 INNER JOIN LOCATION L1
+ON C1.LID=L1.LID;
+------------------------------------------------------------------------------
+177. WAQTD THE EMP FNAME, SAL,, JOB, DNAME IF THE EMP IS
+WORKING IN IT DEPT.
+SELECT FNAME,SAL,JOB,DNAME
+FROM EMP E1 INNER JOIN DEPT D1
+ON E1.DNO=D1.DNO
+WHERE DNAME='IT';
+------------------------------------------------------------------------------
+178. WAQTD THE EMP FULLNAME, DNO, DNAME.
+SELECT CONCAT(E1.FNAME,' ',E1.LNAME) 
+FULLNAME,E1.DNO,D1.DNAME
+FROM EMP E1 INNER JOIN DEPT D1
+ON E1.DNO=D1.DNO;
+-------------------------------------------------------------------------------
+179. WAQTD THE EMP FNAME,DEPT NAME IF THE EMP FNAME 
+STARTS WITH VOWELS.
+SELECT E1.FNAME,D1.DNAME
+FROM EMP E1 INNER JOIN DEPT D1
+ON E1.DNO=D1.DNO
+WHERE SUBSTR(E1.FNAME,1,1)IN('A','E','I','O','U');
+------------------------------------------------------------------------------
+180. WAQTD THE DEPT NO,DEPT NAME AND LOCATION, CITY, 
+STATE WHERE DEPTS ARE LOCATED.
+SELECT D1.DNO,D1.DNAME,L1.LOCATION,L1.CITY,L1.STATE
+FROM DEPT D1 INNER JOIN LOCATION L1
+ON D1.LID=L1.LID;
+------------------------------------------------------------------------------
+
+181. WAQTD THE CUSTOMER FNAME, ORDER_ID IF HE HAS 
+ORDERED ANY PRODUCT.
+SELECT C1.FIRST_NAME,O1.ORDER_ID
+FROM CUSTOMER C1 INNER JOIN ORDERS O1
+ON C1.CID=O1.CID;
+-----------------------------------------------------------------------------
+182. WAQTD THE PRODUCT NAME, PRICE AND ORDER ID IF THE 
+PRODUCTS HAS BEEN ORDERED.
