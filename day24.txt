@@ -214,5 +214,42 @@ GROUP BY C1.FIRST_NAME;
 ----------------------------------------------------------------------------------------------------------
 
 202. WAQTD THE TOTAL REVENUE GENERATED FROM EVERY STATE.
+
+ SELECT SUM(P1.PRICE)"TOTAL REVENUE" ,STATE FROM PRODUCT P1 INNER JOIN ORDERS O1 ON P1.PRODUCT_ID=O1.PRODUCT_ID INNER JOIN CUSTOMER C1 ON O1.CID=C1.CID INNER JOIN LOCATION L1 ON C1.LID=L1.LID GROUP BY STATE;
++---------------+----------------+
+| TOTAL REVENUE | STATE          |
++---------------+----------------+
+|     249493.00 | Karnataka      |
+|      45494.00 | Telangana      |
+|      80495.00 | Tamil Nadu     |
+|     103496.00 | Kerala         |
+|      35497.00 | Andhra Pradesh |
++---------------+----------------+
+-----------------------------------------------------------------------------------------------------------------------------------
 203. WAQTD THE TOTAL REVENUE GENERATED FROM EVERY STATE,
+
+SELECT SUM(P1.PRICE)"TOTAL REVENUE" ,DATE_FORMAT(O1.ORDER_DATE,'%M')MONTH,L1.STATE FROM PRODUCT P1 INNER JOIN ORDERS O1 ON P1.PRODUCT_ID=O1.PRODUCT_ID INNER JOIN CUSTOMER C1 ON O1.CID=C1.CID INNER JOIN LOCATION L1 ON C1.LID=L1.LID  GROUP BY STATE, MONTH;
++---------------+--------+----------------+
+| TOTAL REVENUE | MONTH  | STATE          |
++---------------+--------+----------------+
+|      59999.00 | April  | Karnataka      |
+|      31498.00 | June   | Karnataka      |
+|      74998.00 | July   | Karnataka      |
+|      10998.00 | June   | Telangana      |
+|      26498.00 | August | Telangana      |
+|      42497.00 | May    | Tamil Nadu     |
+|      22999.00 | July   | Tamil Nadu     |
+|      14999.00 | August | Tamil Nadu     |
+|       4499.00 | March  | Kerala         |
+|      37999.00 | June   | Kerala         |
+|      22999.00 | March  | Karnataka      |
+|      10999.00 | April  | Andhra Pradesh |
+|      19999.00 | May    | Andhra Pradesh |
+|       4499.00 | July   | Andhra Pradesh |
+|      22999.00 | April  | Kerala         |
+|      37999.00 | August | Kerala         |
+|      59999.00 | May    | Karnataka      |
+|       1499.00 | April  | Telangana      |
+|       6499.00 | July   | Telangana      |
++---------------+--------+----------------+
 EVERY MONTH.
