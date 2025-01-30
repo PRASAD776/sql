@@ -253,3 +253,6 @@ SELECT SUM(P1.PRICE)"TOTAL REVENUE" ,DATE_FORMAT(O1.ORDER_DATE,'%M')MONTH,L1.STA
 |       6499.00 | July   | Telangana      |
 +---------------+--------+----------------+
 
+========================prodcedure link
+https://www.youtube.com/watch?v=tFOJYFQbBgs
+https://www.youtube.com/live/QEe6m2dz1qg?feature=shared
