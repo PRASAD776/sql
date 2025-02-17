@@ -9,7 +9,7 @@ FROM EMP E1 JOIN EMP E2
 ON E1.MGR=E2.EID;
 -----------------------------------------------------------------------------------------------------
 184. WAQTD THE EMP FNAME, SAL ALONG WITH MANAGER FNAME 
-AND MANAGER SALARY.
+AND MANAGER SALARY. 
 SELECT E1.FNAME,E1.SAL,E2.FNAME,E2.SAL
 FROM EMP E1 JOIN EMP E2
 ON E1.MGR=E2.EID;
